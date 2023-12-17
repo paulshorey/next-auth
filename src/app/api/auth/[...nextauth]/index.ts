@@ -1,14 +1,37 @@
 import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
-// import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
+import AzureADB2CProvider from "next-auth/providers/azure-ad-b2c";
 
+// Prevent build if env variables are not set
+if (!process.env.AZURE_AD_B2C_CLIENT_ID) {
+  throw new Error("AZURE_AD_B2C_CLIENT_ID not defined");
+}
+if (!process.env.AZURE_AD_B2C_CLIENT_SECRET) {
+  throw new Error("AZURE_AD_B2C_CLIENT_SECRET not defined");
+}
+// authorizationUrl: `${process.env.AZURE_AUTHORITY}${process.env.AZURE_TENANT_ID}/oauth2/v2.0/authorize?p=${process.env.AZURE_POLICY}&response_type=code&response_mode=query&scope=offline_access%20openid%20profile`,
+
+// https://next-auth.js.org/getting-started/introduction
 export const options: NextAuthOptions = {
   providers: [
-    // GitHubProvider({
-    //     clientId: process.env.GITHUB_ID as string,
-    //     clientSecret: process.env.GITHUB_SECRET as string,
-    // }),
+    AzureADB2CProvider({
+      tenantId: process.env.AZURE_AD_B2C_TENANT_NAME,
+      clientId: process.env.AZURE_AD_B2C_CLIENT_ID,
+      clientSecret: process.env.AZURE_AD_B2C_CLIENT_SECRET,
+      primaryUserFlow: process.env.AZURE_AD_B2C_PRIMARY_USER_FLOW,
+      authorization: {
+        params: {
+          scope: `offline_access openid profile`,
+          redirect_uri: `http://localhost:3000/api/auth/callback/azure-ad-b2c`,
+          // redirect_uri: `https://jwt.ms/`,
+          response_type: `code`,
+          response_mode: `query`,
+          code_challenge_method: `S256`,
+          code_challenge: `1234567890123456789012345678901234567890123`,
+        },
+      },
+    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -50,9 +73,9 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
-  pages: {
-    signIn: "/auth/signin",
-  },
+  // pages: {
+  //   signIn: "/auth/signin",
+  // },
   callbacks: {
     async jwt({ token, account }) {
       console.log("\n\n\noptions.callbacks.jwt\n", token, account);
