@@ -1,55 +1,28 @@
 import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import AzureADB2CProvider from "next-auth/providers/azure-ad-b2c";
-
-// Prevent build if env variables are not set
-if (!process.env.AZURE_AD_B2C_CLIENT_ID) {
-  throw new Error("AZURE_AD_B2C_CLIENT_ID not defined");
-}
-if (!process.env.AZURE_AD_B2C_CLIENT_SECRET) {
-  throw new Error("AZURE_AD_B2C_CLIENT_SECRET not defined");
-}
-// authorizationUrl: `${process.env.AZURE_AUTHORITY}${process.env.AZURE_TENANT_ID}/oauth2/v2.0/authorize?p=${process.env.AZURE_POLICY}&response_type=code&response_mode=query&scope=offline_access%20openid%20profile`,
 
 // https://next-auth.js.org/getting-started/introduction
 export const options: NextAuthOptions = {
   providers: [
-    AzureADB2CProvider({
-      tenantId: process.env.AZURE_AD_B2C_TENANT_NAME,
-      clientId: process.env.AZURE_AD_B2C_CLIENT_ID,
-      clientSecret: process.env.AZURE_AD_B2C_CLIENT_SECRET,
-      primaryUserFlow: process.env.AZURE_AD_B2C_PRIMARY_USER_FLOW,
-      authorization: {
-        params: {
-          scope: `offline_access openid profile`,
-          redirect_uri: `http://localhost:3000/api/auth/callback/azure-ad-b2c`,
-          // redirect_uri: `https://jwt.ms/`,
-          response_type: `code`,
-          response_mode: `query`,
-          code_challenge_method: `S256`,
-          code_challenge: `1234567890123456789012345678901234567890123`,
-        },
-      },
-    }),
     CredentialsProvider({
       name: "Credentials",
       credentials: {
         username: {
           label: "Username:",
           type: "text",
-          placeholder: "your-cool-username",
+          placeholder: "demo",
         },
         password: {
           label: "Password:",
           type: "password",
-          placeholder: "your-awesome-password",
+          placeholder: "demo",
         },
-        picture: {
-          label: "Your profile picture:",
-          type: "text",
-          placeholder: "https://...",
-        },
+        // picture: {
+        //   label: "Your profile picture:",
+        //   type: "text",
+        //   placeholder: "https://...",
+        // },
       },
       async authorize(credentials) {
         // This is where you need to retrieve user data
@@ -57,15 +30,15 @@ export const options: NextAuthOptions = {
         // Docs: https://next-auth.js.org/configuration/providers/credentials
         const user = {
           id: "41",
-          name: "demo",
+          username: "demo",
           password: "demo",
-          email: "pshorey@firstam.com",
+          email: "example@example.com",
           extraField1: "example1",
           extraField2: "example2",
           extraField3: "example3",
         };
 
-        if (credentials?.username === user.name && credentials?.password === user.password) {
+        if (credentials?.username === user.username && credentials?.password === user.password) {
           return user;
         } else {
           return null;
@@ -80,9 +53,9 @@ export const options: NextAuthOptions = {
     async jwt({ token, account }) {
       console.log("\n\n\noptions.callbacks.jwt\n", token, account);
       // Persist the OAuth access_token to the token right after signin
-      // if (account) {
-      //   token.accessToken = account.access_token;
-      // }
+      if (account && account.access_token) {
+        token.accessToken = account.access_token;
+      }
       return token;
     },
     async session({ session, token, user }) {
@@ -95,6 +68,13 @@ export const options: NextAuthOptions = {
       console.log("\n\n\noptions.callbacks.signIn\n", params);
       return true;
     },
+  },
+  session: {
+    strategy: "jwt",
+    // maxAge: 3600,
+  },
+  jwt: {
+    secret: `{"kty":"oct","kid":"V_83Evwo5NRhY23fPHfa-SPiTAuYdErwIzhlYyUf6d8","alg":"HS512","k":"CluI5Iv97tcY3D8Dw8tW3LgQVxPgLjHpmY5kNAeyogj2sI49z1BKFCNiRKCmeeYi4u39sBCK3fdFcwFk1FprmQ"}`,
   },
 };
 

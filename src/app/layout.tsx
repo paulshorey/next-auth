@@ -1,8 +1,8 @@
 import "@/styles/tailwind.css";
 import "@/styles/reset.css";
 import { Inter } from "next/font/google";
-import Navbar from "./components/Navbar";
-import AuthProvider from "./context/AuthProvider";
+import Navbar from "../components/Navbar";
+import AuthProvider from "../context/AuthProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

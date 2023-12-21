@@ -1,6 +1,6 @@
 import { options } from "./api/auth/[...nextauth]";
 import { getServerSession } from "next-auth/next";
-import UserCard from "./components/UserCard";
+import UserCard from "../components/UserCard";
 
 export default async function Home() {
   const session = await getServerSession(options);
