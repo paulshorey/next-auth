@@ -1,49 +1,37 @@
-# "NextAuth.js Login Authentication"
+# Mantine Next.js template
 
-## With Next.js App Router
+This is a template for [Next.js](https://nextjs.org/) app router + [Mantine](https://mantine.dev/).
+If you want to use pages router instead, see [next-pages-template](https://github.com/mantinedev/next-pages-template).
 
----
+## Features
 
-### Author Links
+This template comes with the following features:
 
-👋 Hello, I'm Dave Gray.
+- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Storybook](https://storybook.js.org/)
+- [Jest](https://jestjs.io/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
+- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
 
-👉 [My Courses](https://courses.davegray.codes/)
+## npm scripts
 
-✅ [Check out my YouTube Channel with hundreds of tutorials](https://www.youtube.com/DaveGrayTeachesCode).
+### Build and dev scripts
 
-🚩 [Subscribe to my channel](https://bit.ly/3nGHmNn)
+- `dev` – start dev server
+- `build` – bundle application for production
+- `analyze` – analyzes application bundle with [@next/bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer)
 
-☕ [Buy Me A Coffee](https://buymeacoffee.com/DaveGray)
+### Testing scripts
 
-🚀 Follow Me:
+- `typecheck` – checks TypeScript types
+- `lint` – runs ESLint
+- `prettier:check` – checks files with Prettier
+- `jest` – runs jest tests
+- `jest:watch` – starts jest watch
+- `test` – runs `jest`, `prettier:check`, `lint` and `typecheck` scripts
 
-- [Twitter](https://twitter.com/yesdavidgray)
-- [LinkedIn](https://www.linkedin.com/in/davidagray/)
-- [Blog](https://yesdavidgray.com)
-- [Reddit](https://www.reddit.com/user/DaveOnEleven)
+### Other scripts
 
----
-
-### Description
-
-📺 [YouTube Video](https://youtu.be/w2h54xz6Ndw) for this repository.
-
----
-
-### 🎓 Academic Honesty
-
-**DO NOT COPY FOR AN ASSIGNMENT** - Avoid plagiarism and adhere to the spirit of this [Academic Honesty Policy](https://www.freecodecamp.org/news/academic-honesty-policy/).
-
----
-
-### ⚙ Free Web Dev Tools
-- 🔗 [Google Chrome Web Browser](https://google.com/chrome/)
-- 🔗 [Visual Studio Code (aka VS Code)](https://code.visualstudio.com/)
-- 🔗 [ES7 React Snippets](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets)
-
-### 📚 References
-- 🔗 [NextAuth.js Official Site](https://next-auth.js.org/)
-- 🔗 [Next.js Official Site](https://nextjs.org/)
-
-
+- `storybook` – starts storybook dev server
+- `storybook:build` – build production storybook bundle to `storybook-static`
+- `prettier:write` – formats all files with Prettier
