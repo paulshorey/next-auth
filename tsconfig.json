@@ -20,6 +20,12 @@
     },
     "plugins": [{ "name": "next" }]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules", "tsconfig.json"]
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".archive/auth/xroute.tsx"
+  ],
+  "exclude": ["node_modules", "tsconfig.json", ".archive"]
 }
