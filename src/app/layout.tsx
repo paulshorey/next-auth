@@ -1,20 +1,24 @@
 import '@/src/styles/tailwind.css';
 import '@mantine/core/styles.css';
-import React from 'react';
-import { MantineProvider, ColorSchemeScript } from '@mantine/core';
-import { theme } from '@/theme';
-import Navbar from '@/src/components/Navbar';
-import AuthProvider from '@/src/context/AuthProvider';
-import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
+import React from 'react';
+import { MantineProvider } from '@mantine/core';
+import { Toaster } from 'react-hot-toast';
+import { theme } from '@/theme';
+import SessionProvider from '@/src/context/SessionProvider';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { sessionGet } from '@/src/app/auth/actions/session';
+import SideNav from '@/src/components/layout/DrawerWithTrigger/SideNav';
+import DrawerWithTrigger from '../components/layout/DrawerWithTrigger';
+
 config.autoAddCss = false;
 
 export const metadata = {
-  title: 'Mantine Next.js template',
-  description: 'I am using Mantine with Next.js!',
+  title: 'Best app authentication / authorization / session management',
 };
 
-export default function RootLayout({ children }: { children: any }) {
+export default async function RootLayout({ children }: { children: any }) {
+  const session = await sessionGet();
   return (
     <html lang="en" data-mantine-color-scheme="dark">
       <head>
@@ -25,14 +29,30 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body>
-        <AuthProvider>
+        <SessionProvider session={session}>
           <MantineProvider defaultColorScheme="dark" theme={theme}>
-            <Navbar />
-            <main className="flex flex-col justify-stretch items-stretch p-1 pt-12 pb-24 min-h-screen">
-              {children}
-            </main>
+            <div className="flex w-full" style={{ width: '100%' }}>
+              <DrawerWithTrigger />
+              {/* <pre className="text-left">
+          <code>{JSON.stringify(session, null, 2)}</code>
+        </pre> */}
+              <main className="flex flex-col justify-stretch items-stretch p-1 pt-12 pb-24 min-h-screen w-full">
+                {children}
+              </main>
+            </div>
+            <Toaster
+              containerStyle={{
+                maxWidth: '100%',
+              }}
+              toastOptions={{
+                className: '',
+                style: {
+                  maxWidth: '100%',
+                },
+              }}
+            />
           </MantineProvider>
-        </AuthProvider>
+        </SessionProvider>
       </body>
     </html>
   );

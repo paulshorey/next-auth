@@ -1,18 +1,17 @@
-import { options } from '@/src/app/api/auth/[...nextauth]';
-import { getServerSession } from 'next-auth/next';
-import UserCard from '@/src/components/UserCard';
-import { redirect } from 'next/navigation';
+import * as React from 'react';
+import UserCard from '@/src/components/account/UserCard';
+import { sessionGet } from '@/src/app/auth/actions/session';
 
-export default async function ServerPage() {
-  const session = await getServerSession(options);
-
-  if (!session) {
-    redirect('/api/auth/signin?callbackUrl=/profile');
-  }
+export default async function Home() {
+  let session = await sessionGet();
 
   return (
-    <section className="flex flex-col gap-6">
-      <UserCard user={session?.user} pagetype={'Profile'} />
-    </section>
+    <>
+      {session ? (
+        <UserCard user={session?.user} pagetype={'Home'} />
+      ) : (
+        <h1 className="text-5xl">You Shall Not Pass!</h1>
+      )}
+    </>
   );
 }

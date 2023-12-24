@@ -1,9 +1,9 @@
-import { options } from '@/src/app/api/auth/[...nextauth]';
-import { getServerSession } from 'next-auth/next';
-import UserCard from '@/src/components/UserCard';
+import * as React from 'react';
+import UserCard from '@/src/components/account/UserCard';
+import { sessionGet } from '@/src/app/auth/actions/session';
 
 export default async function Home() {
-  const session = await getServerSession(options);
+  let session = await sessionGet();
 
   return (
     <>

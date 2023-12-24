@@ -1,16 +1,24 @@
 'use client';
+
 import * as React from 'react';
 import { Accordion, AccordionValue, Button, Fieldset, TextInput } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBolt } from '@fortawesome/free-solid-svg-icons';
 import { faCircleXmark } from '@fortawesome/pro-regular-svg-icons';
+import { toast } from 'react-hot-toast';
 import styles from './index.module.scss';
 import SignupResetPassword from './form/ResetPassword';
 import SignupPassword from './form/Password';
 import SignupOtpCode from './form/OtpCode';
+import { SessionContext } from '@/src/context/SessionProvider';
+import { sessionStart, sessionEdit } from '@/src/app/auth/actions/session';
 
 export default function SigninSignupReset({ error, csrfToken }: any = {}) {
   const containerRef = React.useRef<HTMLDivElement>(null);
+  const session = React.useContext(SessionContext);
+  // React.useEffect(() => {
+  //   sessionStart({ ui: { signupPageTimestamp: Date.now() } });
+  // }, []);
   return (
     <div className={styles.container} ref={containerRef}>
       <h1 className={styles.title}>
@@ -36,10 +44,25 @@ export default function SigninSignupReset({ error, csrfToken }: any = {}) {
 
       <Accordion
         className={styles.accordion}
-        defaultValue="activeAccordionOtp"
+        defaultValue={session.ui.signupAccordionItem || 'activeAccordionOtp'}
         onChange={(value: AccordionValue<any>) => {
-          let el = document.getElementById(typeof value === 'string' ? value : value?.[0] || '');
-          let firstInput = el?.querySelector('input');
+          const id = typeof value === 'string' ? value : value?.[0] || '';
+          toast.success(
+            <div>
+              <b className="text-nowrap">
+                Switched to{' '}
+                <u>
+                  <code>${id}</code>
+                </u>
+              </b>
+              <br />
+              <sup>Next time you load this page, it will auto-open.</sup>
+            </div>,
+            { duration: 100000 }
+          );
+          const el = document.getElementById(id);
+          sessionEdit({ ui: { signupAccordionItem: id } });
+          const firstInput = el?.querySelector('input');
           if (firstInput) {
             setTimeout(() => {
               if (firstInput) {

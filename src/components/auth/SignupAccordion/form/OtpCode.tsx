@@ -4,9 +4,9 @@ import { Button, Checkbox, Fieldset, TextInput } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faCircleXmark } from '@fortawesome/sharp-solid-svg-icons';
 import styles from './index.module.scss';
-import { signIn } from 'next-auth/react';
 import stytchOtpSend from '@/src/app/auth/actions/stytchOtpSend';
 import stytchOtpAuthenticate from '@/src/app/auth/actions/stytchOtpAuthenticate';
+import { sessionEdit } from '@/src/app/auth/actions/session';
 
 export default function SignupOtpCode({ csrfToken }: any = {}) {
   const [errorMessage, setErrorMessage] = React.useState('');
@@ -24,6 +24,13 @@ export default function SignupOtpCode({ csrfToken }: any = {}) {
         className={styles.form}
         onSubmit={async (e) => {
           e.preventDefault();
+          (async () => {
+            let session = await sessionEdit({
+              ui: { SignupAccordion: 'otp' },
+            });
+            console.log('session', session);
+          })();
+
           if (phoneOrEmail && otpCode.length >= 6) {
             // Sign in
             let data = await stytchOtpAuthenticate({ code: otpCode, method_id: otpMethodId });
