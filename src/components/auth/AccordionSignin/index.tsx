@@ -10,6 +10,7 @@ import SignupPassword from '../Fieldsets/Password';
 import SignupOtpCode from '../Fieldsets/OtpCode';
 import { SessionContext } from '@/src/context/SessionProvider';
 import { sessionEdit } from '@/src/app/auth/actions/session';
+import SocialProvider from '../Fieldsets/SocialProvider';
 // import makeToast from '@/src/functions/makeToast';
 
 export default function AccordionSignin({ error, csrfToken }: any = {}) {
@@ -87,9 +88,7 @@ export default function AccordionSignin({ error, csrfToken }: any = {}) {
         >
           <Accordion.Control>Google, LinkedIn, Github, Apple</Accordion.Control>
           <Accordion.Panel>
-            <Fieldset legend={<b>Login with a social provider</b>} className={styles.fieldset}>
-              <p>Coming soon!</p>
-            </Fieldset>
+            <SocialProvider />
           </Accordion.Panel>
         </Accordion.Item>
         <Accordion.Item

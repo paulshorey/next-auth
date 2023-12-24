@@ -5,7 +5,7 @@ export interface SessionData {
     [key: string]: any;
   };
   user: {
-    id?: string;
+    auth?: boolean;
     name?: string;
     phone?: string;
     email?: string;
@@ -29,7 +29,7 @@ export const sessionDefault = {
 export function sessionDataFromStytchResponse(data: any) {
   return {
     user: {
-      id: data.user_id,
+      auth: true,
       email: data.user.emails?.[0]?.email,
       phone: data.user.phone_numbers?.[0]?.phone_number,
       trusted_metadata: data.user.trusted_metadata,

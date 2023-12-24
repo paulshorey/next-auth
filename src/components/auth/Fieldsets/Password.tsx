@@ -6,13 +6,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/sharp-solid-svg-icons';
 import styles from './index.module.scss';
 import stytchPasswordAuthenticate from '@/src/app/auth/actions/stytchPasswordAuthenticate';
-import makeToast from '@/src/functions/makeToast';
 import phoneOrEmail from '@/src/functions/phoneOrEmail';
+import useAuthReaction from '@/src/hooks/useAuthReaction';
 
 export default function SignupPassword({ csrfToken }: any = {}) {
+  const { success, error, errorMessage } = useAuthReaction();
   const [email, setEmail] = React.useState('');
-  const [errorMessage, setErrorMessage] = React.useState('');
   const formRef = React.useRef<HTMLFormElement>(null);
+
   return (
     <Fieldset legend={<b>Sign in</b>} className={styles.fieldset}>
       {/* Regular username/password form:  */}
@@ -28,24 +29,21 @@ export default function SignupPassword({ csrfToken }: any = {}) {
             );
             const [, validEmail] = phoneOrEmail(data.email);
             if (!validEmail) {
-              setErrorMessage('Please enter a valid email address.');
+              error('Please enter a valid email address.');
               return;
             }
             const response = await stytchPasswordAuthenticate({
               email: data.email,
               password: data.password,
             });
-            if (response.status_code === 200) {
-              // Success
-              console.log('password auth success');
-              setErrorMessage('');
-            } else {
-              const err = response.message || 'Error';
-              setErrorMessage(err);
-              makeToast({ title: err, type: 'error' });
+            // Successful
+            if (response.session?.user.auth) {
+              success();
+              return;
             }
+            // Failed
+            error(response.message || 'Error');
           }
-          e.preventDefault();
         }}
       >
         {!!errorMessage && (
@@ -63,7 +61,7 @@ export default function SignupPassword({ csrfToken }: any = {}) {
             value={email}
             onChange={(event) => {
               setEmail(event.currentTarget.value);
-              setErrorMessage('');
+              error('');
             }}
           />
         </div>

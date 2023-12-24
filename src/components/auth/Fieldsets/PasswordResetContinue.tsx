@@ -2,15 +2,15 @@
 
 import * as React from 'react';
 import { Button, Fieldset, TextInput } from '@mantine/core';
-import { useSearchParams, useParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import styles from './index.module.scss';
-// import stytchApi from '@/src/functions/stytchApi';
 import FieldErrorMessage from '@/src/components/atoms/FieldErrorMessage';
-import makeToast from '@/src/functions/makeToast';
 import stytchPasswordResetAuthenticate from '@/src/app/auth/actions/stytchPasswordResetAuthenticate';
+import useAuthReaction from '@/src/hooks/useAuthReaction';
 
 export default function PasswordResetContinue() {
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const { success, error, errorMessage } = useAuthReaction();
+
   const formResetPasswordRef = React.useRef<HTMLFormElement>(null);
   const searchParams = useSearchParams();
   const token = searchParams.get('token') || '';
@@ -30,28 +30,24 @@ export default function PasswordResetContinue() {
               Array.from(formData.entries()).map(([key, value]) => [key, String(value)])
             );
             if (!data.password) {
-              setErrorMessage('You have not entered a password.');
+              error('You have not entered a password.');
               return;
             }
             if (data.password !== data.password2) {
-              setErrorMessage("Oops! The passwords don't match.");
+              error("Oops! The passwords don't match.");
               return;
             }
             const response = await stytchPasswordResetAuthenticate({
               password: data.password,
               token: data.token,
             });
-            if (response.status_code === 200) {
-              // Success
-              console.log('password auth success');
-              setErrorMessage('');
-            } else {
-              const err = response.message || 'Error';
-              setErrorMessage(err);
-              makeToast({ title: err, type: 'error' });
+            // Successful
+            if (response.session?.user.auth) {
+              success('Welcome!');
             }
+            // Failed
+            error(response.message || 'Error');
           }
-          e.preventDefault();
         }}
       >
         <FieldErrorMessage errorMessage={errorMessage} />
@@ -65,7 +61,7 @@ export default function PasswordResetContinue() {
             placeholder="New password"
             variant="filled"
             onChange={() => {
-              setErrorMessage('');
+              error('');
             }}
           />
         </div>
@@ -77,7 +73,7 @@ export default function PasswordResetContinue() {
             placeholder="Re-enter password"
             variant="filled"
             onChange={() => {
-              setErrorMessage('');
+              error('');
             }}
           />
         </div>

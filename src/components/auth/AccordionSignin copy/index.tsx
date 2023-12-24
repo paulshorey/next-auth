@@ -8,13 +8,13 @@ import styles from './index.module.scss';
 import SignupResetPassword from '../Fieldsets/PasswordResetStart';
 import SignupPassword from '../Fieldsets/Password';
 import SignupOtpCode from '../Fieldsets/OtpCode';
-import { SessionContext } from '@/src/context/SessionProvider';
+// import { SessionContext } from '@/src/context/SessionProvider';
 import { sessionEdit } from '@/src/app/auth/actions/session';
 // import makeToast from '@/src/functions/makeToast';
 
 export default function AccordionSignin({ error, csrfToken }: any = {}) {
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const session = React.useContext(SessionContext);
+  // const session = React.useContext(SessionContext);
   // React.useEffect(() => {
   //   sessionStart({ ui: { signupPageTimestamp: Date.now() } });
   // }, []);

@@ -10,6 +10,7 @@ import SessionProvider from '@/src/context/SessionProvider';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { sessionGet } from '@/src/app/auth/actions/session';
 import DrawerWithTrigger from '../components/layout/DrawerWithTrigger';
+import TopRightAccountDropdown from '../components/layout/TopRightAccountDropdown';
 
 config.autoAddCss = false;
 
@@ -31,9 +32,6 @@ export default async function RootLayout({ children }: { children: any }) {
       <body>
         <SessionProvider session={session}>
           <MantineProvider defaultColorScheme="dark" theme={theme}>
-            <pre className="text-left">
-              <code>ServerSide: {JSON.stringify(session, null, 2)}</code>
-            </pre>
             <div className="flex w-full" style={{ width: '100%' }}>
               <DrawerWithTrigger />
               <main className="flex flex-col justify-stretch items-stretch p-1 pt-12 pb-24 min-h-screen w-full">
@@ -55,6 +53,7 @@ export default async function RootLayout({ children }: { children: any }) {
                 },
               }}
             />
+            <TopRightAccountDropdown />
           </MantineProvider>
         </SessionProvider>
       </body>

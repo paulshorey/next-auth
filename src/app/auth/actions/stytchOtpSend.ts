@@ -17,9 +17,12 @@ export default async function stytchOtpSend(post: { phoneOrEmail: string }) {
     }
     let data = '' as any;
     if (phone) {
-      data = await stytchClient.otps.sms.loginOrCreate({ phone_number: phone });
+      data = await stytchClient.otps.sms.loginOrCreate({
+        phone_number: phone,
+        create_user_as_pending: true,
+      });
     } else {
-      data = await stytchClient.otps.email.loginOrCreate({ email });
+      data = await stytchClient.otps.email.loginOrCreate({ email, create_user_as_pending: true });
     }
     if (data) {
       const err = !data ? 'No data' : data.message || data.error;

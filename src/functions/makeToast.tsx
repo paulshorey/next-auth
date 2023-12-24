@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faX } from '@fortawesome/free-solid-svg-icons';
+import { faX } from '@fortawesome/pro-solid-svg-icons';
 import { toast } from 'react-hot-toast';
 
 type Props = {

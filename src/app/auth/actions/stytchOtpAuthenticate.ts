@@ -1,7 +1,7 @@
 'use server';
 
 import { Client } from 'stytch';
-import { SessionData } from '@/src/actionTypes/session';
+import { SessionData, sessionDataFromStytchResponse } from '@/src/actionTypes/session';
 import { sessionStart } from '@/src/app/auth/actions/session';
 
 const stytchClient = new Client({
@@ -27,20 +27,7 @@ export default async function stytchOtpAuthenticate(post: {
       method_id: post.method_id,
       session_duration_minutes: post.long_session ? 36000 : 10,
     });
-    const session = await sessionStart({
-      user: {
-        id: data.user_id,
-        email: data.user.emails?.[0]?.email,
-        phone: data.user.phone_numbers?.[0]?.phone_number,
-        trusted_metadata: data.user.trusted_metadata,
-        untrusted_metadata: data.user.untrusted_metadata,
-        providers: data.user.providers,
-      },
-      session: {
-        jwt: data.session_jwt,
-        token: data.session_token,
-      },
-    });
+    const session = await sessionStart(sessionDataFromStytchResponse(data));
     return { session, status_code: data.status_code };
   } catch (error: any) {
     console.error(error);

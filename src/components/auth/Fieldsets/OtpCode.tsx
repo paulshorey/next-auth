@@ -4,24 +4,27 @@ import * as React from 'react';
 import { Button, Checkbox, Fieldset, TextInput } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faCircleXmark } from '@fortawesome/sharp-solid-svg-icons';
+import { useRouter } from 'next/navigation';
 import styles from './index.module.scss';
 import stytchOtpSend from '@/src/app/auth/actions/stytchOtpSend';
 import stytchOtpAuthenticate from '@/src/app/auth/actions/stytchOtpAuthenticate';
 import { sessionEdit } from '@/src/app/auth/actions/session';
 import makeToast from '@/src/functions/makeToast';
+import useAuthReaction from '@/src/hooks/useAuthReaction';
 
 export default function SignupOtpCode({ csrfToken }: any = {}) {
-  const [errorMessage, setErrorMessage] = React.useState('');
+  const { success, error, errorMessage } = useAuthReaction();
   const [phoneOrEmail, setPhoneOrEmail] = React.useState('');
   const [codeSent, setCodeSent] = React.useState(false);
   const [otpMethodId, setOtpMethodId] = React.useState('');
   const [otpCode, setOtpCode] = React.useState('');
+  const router = useRouter();
   const handleInputChange = (value: string) => {
     setPhoneOrEmail(value);
     setCodeSent(false);
   };
   return (
-    <Fieldset legend="No password or registration needed!" className={styles.fieldset}>
+    <Fieldset legend="No passwords or registration needed!" className={styles.fieldset}>
       <form
         className={styles.form}
         onSubmit={async (e) => {
@@ -30,31 +33,24 @@ export default function SignupOtpCode({ csrfToken }: any = {}) {
             const session = await sessionEdit({
               ui: { SignupAccordion: 'otp' },
             });
-            console.log('session', session);
           })();
           /*
            * Step 2: Authenticate
            */
           if (phoneOrEmail && otpCode.length >= 6) {
             const response = await stytchOtpAuthenticate({ code: otpCode, method_id: otpMethodId });
-            console.log('otp data', response);
             // Success
-            if (response.session?.user.id) {
-              console.log('otp auth success');
-              setErrorMessage('');
-              setCodeSent(false);
+            if (response.session?.user.auth) {
+              success();
               return;
             }
-            // Error
+            // Failure
             if (response.message?.includes('method_id')) {
-              // resend code
-              setErrorMessage('');
+              error('');
               setOtpCode('');
               setOtpMethodId('');
             } else {
-              const err = response.message || 'Error';
-              setErrorMessage(err);
-              makeToast({ title: err, type: 'error' });
+              error(response.message || 'Error');
               return;
             }
           }
@@ -63,22 +59,21 @@ export default function SignupOtpCode({ csrfToken }: any = {}) {
            */
           if (phoneOrEmail) {
             const response = await stytchOtpSend({ phoneOrEmail });
-            console.log('otp data', response);
             if (response.email_id || response.phone_id) {
               setCodeSent(true);
               setOtpMethodId(response.email_id || response.phone_id);
-              setErrorMessage('');
+              error('');
               return;
             }
             const err = response.message || 'Error';
-            setErrorMessage(err);
+            error(err);
             makeToast({ title: err, type: 'error' });
             return;
           }
           /*
            * 0: No user input
            */
-          setErrorMessage('Please enter your phone or email.');
+          error('Please enter your phone or email.');
         }}
       >
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
@@ -153,8 +148,8 @@ export default function SignupOtpCode({ csrfToken }: any = {}) {
           </Button>
         </div>
 
-        {/* <p className="text-stone-500 text-[1rem] pt-5 pb-5 text-center">
-          You'll be able to add a password later if you really want to.
+        {/* <p className="text-stone-500 text-sm pt-3 pb-3">
+          You'll be able to add a password if you want.
         </p> */}
       </form>
     </Fieldset>

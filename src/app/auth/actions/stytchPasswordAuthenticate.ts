@@ -2,7 +2,7 @@
 
 import { Client } from 'stytch';
 import { sessionStart } from '@/src/app/auth/actions/session';
-import { SessionData } from '@/src/actionTypes/session';
+import { SessionData, sessionDataFromStytchResponse } from '@/src/actionTypes/session';
 
 const stytchClient = new Client({
   project_id: process.env.STYTCH_PROJECTID || '',
@@ -25,20 +25,7 @@ export default async function stytchPasswordAuthenticate(post: {
       email: post.email,
       password: post.password,
     });
-    const session = await sessionStart({
-      user: {
-        id: data.user_id,
-        email: data.user.emails?.[0]?.email,
-        phone: data.user.phone_numbers?.[0]?.phone_number,
-        trusted_metadata: data.user.trusted_metadata,
-        untrusted_metadata: data.user.untrusted_metadata,
-        providers: data.user.providers,
-      },
-      session: {
-        jwt: data.session_jwt,
-        token: data.session_token,
-      },
-    });
+    const session = await sessionStart(sessionDataFromStytchResponse(data));
     return { session, status_code: data.status_code };
   } catch (error: any) {
     console.error(error);

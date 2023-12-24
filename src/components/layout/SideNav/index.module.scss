@@ -63,9 +63,19 @@
 }
 
 .triggerInside {
+  cursor: pointer;
   padding: 0 0 0 0.75rem;
   svg {
     font-size: 1.75rem;
     transform: scaleY(0.933);
   }
+}
+.triggerX {
+  cursor: pointer;
+  margin-right: 0.5rem;
+  opacity: 0.33;
+}
+.triggerLogo {
+  cursor: pointer;
+  margin-left: 0.8rem;
 }
