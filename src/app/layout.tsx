@@ -1,4 +1,5 @@
 import '@/src/styles/tailwind.css';
+import '@/src/styles/global.css';
 import '@mantine/core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import React from 'react';
@@ -8,7 +9,6 @@ import { theme } from '@/theme';
 import SessionProvider from '@/src/context/SessionProvider';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { sessionGet } from '@/src/app/auth/actions/session';
-import SideNav from '@/src/components/layout/DrawerWithTrigger/SideNav';
 import DrawerWithTrigger from '../components/layout/DrawerWithTrigger';
 
 config.autoAddCss = false;
@@ -43,11 +43,15 @@ export default async function RootLayout({ children }: { children: any }) {
             <Toaster
               containerStyle={{
                 maxWidth: '100%',
+                padding: '0',
               }}
               toastOptions={{
-                className: '',
+                className: 'reactHotToast',
                 style: {
+                  justifyContent: 'bottom',
+                  padding: '0 0.75rem 0 1.25rem',
                   maxWidth: '100%',
+                  whiteSpace: 'nowrap',
                 },
               }}
             />
