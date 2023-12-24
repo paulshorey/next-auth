@@ -1,5 +1,5 @@
 import '@/src/styles/tailwind.css';
-import '@/src/styles/global.css';
+import '@/src/styles/global.scss';
 import '@mantine/core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import React from 'react';
@@ -31,11 +31,11 @@ export default async function RootLayout({ children }: { children: any }) {
       <body>
         <SessionProvider session={session}>
           <MantineProvider defaultColorScheme="dark" theme={theme}>
+            <pre className="text-left">
+              <code>ServerSide: {JSON.stringify(session, null, 2)}</code>
+            </pre>
             <div className="flex w-full" style={{ width: '100%' }}>
               <DrawerWithTrigger />
-              {/* <pre className="text-left">
-          <code>{JSON.stringify(session, null, 2)}</code>
-        </pre> */}
               <main className="flex flex-col justify-stretch items-stretch p-1 pt-12 pb-24 min-h-screen w-full">
                 {children}
               </main>

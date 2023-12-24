@@ -5,14 +5,14 @@ import { Accordion, AccordionValue, Fieldset } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/pro-regular-svg-icons';
 import styles from './index.module.scss';
-import SignupResetPassword from './form/ResetPassword';
-import SignupPassword from './form/Password';
-import SignupOtpCode from './form/OtpCode';
+import SignupResetPassword from '../Fieldsets/PasswordResetStart';
+import SignupPassword from '../Fieldsets/Password';
+import SignupOtpCode from '../Fieldsets/OtpCode';
 import { SessionContext } from '@/src/context/SessionProvider';
 import { sessionEdit } from '@/src/app/auth/actions/session';
-import makeToast from '@/src/functions/makeToast';
+// import makeToast from '@/src/functions/makeToast';
 
-export default function SigninSignupReset({ error, csrfToken }: any = {}) {
+export default function AccordionSignin({ error, csrfToken }: any = {}) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const session = React.useContext(SessionContext);
   // React.useEffect(() => {
@@ -46,12 +46,12 @@ export default function SigninSignupReset({ error, csrfToken }: any = {}) {
         defaultValue={session.ui.signupAccordionItem || 'activeAccordionOtp'}
         onChange={(value: AccordionValue<any>) => {
           const id = typeof value === 'string' ? value : value?.[0] || '';
-          makeToast({
-            id: 'signupAccordionItem',
-            title: `Switched to ${id}`,
-            description: 'Next time you load this page, it will auto-open.',
-            // x: true,
-          });
+          // makeToast({
+          //   id: 'signupAccordionItem',
+          //   title: `Switched to ${id}`,
+          //   description: 'Next time you load this page, it will auto-open.',
+          //   // x: true,
+          // });
           const el = document.getElementById(id);
           sessionEdit({ ui: { signupAccordionItem: id } });
           const firstInput = el?.querySelector('input');

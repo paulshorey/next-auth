@@ -1,6 +1,7 @@
 'use server';
-import phoneOrEmail from '@/src/functions/phoneOrEmail';
+
 import { Client } from 'stytch';
+import phoneOrEmail from '@/src/functions/phoneOrEmail';
 
 const stytchClient = new Client({
   project_id: process.env.STYTCH_PROJECTID || '',
@@ -10,7 +11,7 @@ const stytchClient = new Client({
 export default async function stytchOtpSend(post: { phoneOrEmail: string }) {
   console.error('\n\n\n', ['stytchOtpSend'], '\n', post, '\n\n\n');
   try {
-    let [phone, email, error] = phoneOrEmail(post.phoneOrEmail);
+    const [phone, email, error] = phoneOrEmail(post.phoneOrEmail);
     if (error) {
       return { message: error };
     }
@@ -18,20 +19,19 @@ export default async function stytchOtpSend(post: { phoneOrEmail: string }) {
     if (phone) {
       data = await stytchClient.otps.sms.loginOrCreate({ phone_number: phone });
     } else {
-      data = await stytchClient.otps.email.loginOrCreate({ email: email });
+      data = await stytchClient.otps.email.loginOrCreate({ email });
     }
     if (data) {
-      // @ts-ignore
-      let error = !data ? 'No data' : data.message || data.error;
-      if (error) {
-        console.error(error, data);
-        return { message: 'Data: ' + error };
+      const err = !data ? 'No data' : data.message || data.error;
+      if (err) {
+        console.error(err, data);
+        return { message: `Data: ${err}` };
       }
       return data;
     }
     return { message: 'Invalid phone or email format' };
   } catch (error: any) {
     console.error(error);
-    return { message: 'Error: ' + error.message };
+    return { message: error.error_message || error.message };
   }
 }

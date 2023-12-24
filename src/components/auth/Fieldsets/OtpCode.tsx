@@ -1,4 +1,5 @@
 'use client';
+
 import * as React from 'react';
 import { Button, Checkbox, Fieldset, TextInput } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +8,7 @@ import styles from './index.module.scss';
 import stytchOtpSend from '@/src/app/auth/actions/stytchOtpSend';
 import stytchOtpAuthenticate from '@/src/app/auth/actions/stytchOtpAuthenticate';
 import { sessionEdit } from '@/src/app/auth/actions/session';
+import makeToast from '@/src/functions/makeToast';
 
 export default function SignupOtpCode({ csrfToken }: any = {}) {
   const [errorMessage, setErrorMessage] = React.useState('');
@@ -25,43 +27,65 @@ export default function SignupOtpCode({ csrfToken }: any = {}) {
         onSubmit={async (e) => {
           e.preventDefault();
           (async () => {
-            let session = await sessionEdit({
+            const session = await sessionEdit({
               ui: { SignupAccordion: 'otp' },
             });
             console.log('session', session);
           })();
-
+          /*
+           * Step 2: Authenticate
+           */
           if (phoneOrEmail && otpCode.length >= 6) {
-            // Sign in
-            let data = await stytchOtpAuthenticate({ code: otpCode, method_id: otpMethodId });
-            console.log('otp data', data);
-            if (data.status_code === 200) {
-              // Success
+            const response = await stytchOtpAuthenticate({ code: otpCode, method_id: otpMethodId });
+            console.log('otp data', response);
+            // Success
+            if (response.session?.user.id) {
               console.log('otp auth success');
               setErrorMessage('');
               setCodeSent(false);
-            } else {
-              setErrorMessage(data.message || 'Error');
+              return;
             }
-          } else if (phoneOrEmail) {
-            // Get code
-            let data = await stytchOtpSend({ phoneOrEmail });
-            console.log('otp data', data);
-            if (data.status_code === 200 && (data.email_id || data.phone_id)) {
-              setCodeSent(true);
-              setOtpMethodId(data.email_id || data.phone_id);
+            // Error
+            if (response.message?.includes('method_id')) {
+              // resend code
               setErrorMessage('');
+              setOtpCode('');
+              setOtpMethodId('');
             } else {
-              setErrorMessage(data.message || 'Error');
+              const err = response.message || 'Error';
+              setErrorMessage(err);
+              makeToast({ title: err, type: 'error' });
+              return;
             }
           }
+          /*
+           * Step 1: Authenticate
+           */
+          if (phoneOrEmail) {
+            const response = await stytchOtpSend({ phoneOrEmail });
+            console.log('otp data', response);
+            if (response.email_id || response.phone_id) {
+              setCodeSent(true);
+              setOtpMethodId(response.email_id || response.phone_id);
+              setErrorMessage('');
+              return;
+            }
+            const err = response.message || 'Error';
+            setErrorMessage(err);
+            makeToast({ title: err, type: 'error' });
+            return;
+          }
+          /*
+           * 0: No user input
+           */
+          setErrorMessage('Please enter your phone or email.');
         }}
       >
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
 
         {/* Part 1: Receive code */}
         <div
-          className={styles.fieldsetStep + ' mt-3 mb-3'}
+          className={`${styles.fieldsetStep} mt-3 mb-3`}
           data-state={codeSent ? 'disabled' : 'active'}
         >
           <TextInput
@@ -95,13 +119,15 @@ export default function SignupOtpCode({ csrfToken }: any = {}) {
             </p>
           )}
           {!!codeSent && (
-            <p className="text-green-500 text-sm pt-2">Success! Now paste the code below. 👇</p>
+            <p className="text-green-500 text-sm pt-2">
+              Code sent! Now just paste it below.&thinsp;↓
+            </p>
           )}
         </div>
 
         {/* Part 2: Confirm code */}
         <div
-          className={styles.fieldsetStep + ' mt-2 mb-2'}
+          className={`${styles.fieldsetStep} mt-2 mb-2`}
           data-state={!codeSent ? 'disabled' : 'active'}
         >
           <TextInput
@@ -120,7 +146,7 @@ export default function SignupOtpCode({ csrfToken }: any = {}) {
           />
         </div>
 
-        <div className={styles.fieldsetStep + ' mb-1'}>
+        <div className={`${styles.fieldsetStep} mb-1`}>
           <Button type="submit" size="lg" variant="outline" className={styles.fieldsetSubmitButton}>
             {/* {!codeSent ? 'Submit' : 'Enter site'} */}
             Enter site

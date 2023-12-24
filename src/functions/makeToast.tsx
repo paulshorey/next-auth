@@ -16,7 +16,8 @@ export default function makeToast({ type = 'success', title, description, x, ...
     options.id = 'oneToastAtATime';
   }
   if (!options.duration) {
-    options.duration = 5000;
+    if (type === 'error') options.duration = 10000;
+    else options.duration = 5000;
   }
   let Content = null;
   const Message = [];

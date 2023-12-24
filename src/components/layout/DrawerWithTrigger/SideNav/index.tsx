@@ -16,7 +16,7 @@ import {
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/sharp-solid-svg-icons';
-import classes from './index.module.css';
+import classes from './index.module.scss';
 
 const nav = [
   { link: '/', label: 'Home', icon: IconBellRinging },

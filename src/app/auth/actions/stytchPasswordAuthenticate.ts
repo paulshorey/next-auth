@@ -1,8 +1,8 @@
 'use server';
 
 import { Client } from 'stytch';
-import { SessionData } from '@/src/actionTypes/session';
 import { sessionStart } from '@/src/app/auth/actions/session';
+import { SessionData } from '@/src/actionTypes/session';
 
 const stytchClient = new Client({
   project_id: process.env.STYTCH_PROJECTID || '',
@@ -15,17 +15,15 @@ type responseType = {
   session?: SessionData;
 };
 
-export default async function stytchOtpAuthenticate(post: {
-  code: string;
-  method_id: string;
-  long_session?: boolean;
+export default async function stytchPasswordAuthenticate(post: {
+  email: string;
+  password: string;
 }): Promise<responseType> {
-  console.error('\n\n\n', ['stytchOtpAuthenticate'], '\n', post, '\n\n\n');
+  console.error('\n\n\n', ['stytchPasswordAuthenticate'], '\n', post, '\n\n\n');
   try {
-    const data = await stytchClient.otps.authenticate({
-      code: post.code,
-      method_id: post.method_id,
-      session_duration_minutes: post.long_session ? 36000 : 10,
+    const data = await stytchClient.passwords.authenticate({
+      email: post.email,
+      password: post.password,
     });
     const session = await sessionStart({
       user: {
