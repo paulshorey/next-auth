@@ -44,7 +44,7 @@ export default function AccordionSignin({ error, csrfToken }: any = {}) {
 
       <Accordion
         className={styles.accordion}
-        defaultValue={session.ui.signupAccordionItem || 'activeAccordionOtp'}
+        defaultValue={session?.ui?.signupAccordionItem || 'activeAccordionOtp'}
         onChange={(value: AccordionValue<any>) => {
           const id = typeof value === 'string' ? value : value?.[0] || '';
           // makeToast({

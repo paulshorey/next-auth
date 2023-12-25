@@ -10,7 +10,7 @@ export default function AuthSigninPage() {
   const session = React.useContext(SessionContext);
   useEffect(() => {
     // When user first loads the page, revoke any existing session.
-    if (session.user.auth) {
+    if (session?.user?.auth) {
       (async () => {
         const response = await stytchRevokeSession();
         console.log('response', response);

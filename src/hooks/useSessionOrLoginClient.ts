@@ -11,7 +11,7 @@ export default function useSessionOrLogin() {
   const url = `${path}${searchParams.toString() ? '?' : ''}${searchParams.toString()}`;
 
   useEffect(() => {
-    if (!session.user.auth) {
+    if (!session?.user?.auth) {
       router.push(`/auth?redirect=${encodeURIComponent(url)}`);
     }
   }, []);
