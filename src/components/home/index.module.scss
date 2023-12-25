@@ -1,4 +1,5 @@
 .container {
+  position: relative;
   width: 100%;
 }
 .title {
@@ -13,17 +14,18 @@
 }
 
 .inputGroup {
+  width: 100%;
   position: relative;
   margin-top: 0.44rem;
-  align-items: center;
-  justify-content: center;
+  align-items: stretch;
+  justify-content: stretch;
 }
 .textarea {
   flex-grow: 1;
   width: 100%;
   textarea {
     // border: solid 1px rgba(255, 255, 255, 0.5);
-    padding: 0.33rem 2.5rem 0.44rem 0.75rem;
+    padding: 0.33rem 2.5rem 0.44rem 0.66rem;
   }
   textarea,
   ::placeholder {

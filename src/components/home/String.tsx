@@ -2,27 +2,18 @@
 
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSend } from '@fortawesome/sharp-solid-svg-icons';
-import { faCopy } from '@fortawesome/pro-light-svg-icons';
-import {
-  Button,
-  ButtonGroup,
-  NativeSelect,
-  PillGroup,
-  Select,
-  Textarea,
-  TextInput,
-} from '@mantine/core';
+import { faCopy as faCopySolid } from '@fortawesome/sharp-solid-svg-icons';
+import { faAngleDown } from '@fortawesome/pro-light-svg-icons';
+import { Button, Flex, Select, TextInput } from '@mantine/core';
 import { fromByteArray } from 'base64-js';
 import classes from './index.module.scss';
 
 export default function HomeYoutube() {
   const [input, setInput] = React.useState('');
   const [output, setOutput] = React.useState('');
-  const [operation, setOperation] = React.useState('');
-  const [disabled, setDisabled] = React.useState(true);
-  const formRef = React.useRef<HTMLFormElement>(null);
+  const [operation, setOperation] = React.useState('encode URL');
   const handleSubmit = () => {
+    if (!operation || !input) return;
     try {
       switch (operation) {
         case 'decode URL':
@@ -43,60 +34,63 @@ export default function HomeYoutube() {
     } catch (err: any) {
       setOutput(err?.message || err?.toString() || '');
     }
-    setDisabled(false);
   };
   return (
-    <div className={`${classes.container} pb-6`}>
+    <div className={`${classes.container} mb-6`}>
       <h2 className={`${classes.title}`}>string</h2>
-      <form
-        ref={formRef}
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-      >
-        <div className={classes.inputGroup}>
-          <TextInput
-            name="input"
-            className={classes.textarea}
-            placeholder="..."
-            onChange={(e) => {
-              console.log('e.target.value', e.target.value);
-              setOutput('');
-              setOperation('');
-              setInput(e.target.value);
-              setDisabled(true);
-            }}
-          />
-        </div>
-        <NativeSelect
-          name="operation"
-          data={['decode URL', 'decode base64', 'encode URL']}
-          defaultValue={operation}
-          rightSection={
-            <Button type="submit" className={`${classes.button} text-green-500`}>
-              <FontAwesomeIcon size="lg" icon={faSend} />
-            </Button>
-          }
+      <Flex className={`${classes.inputGroup}`}>
+        <TextInput
+          name="input"
+          className={classes.textarea}
+          placeholder="..."
+          value={input}
           onChange={(e) => {
             console.log('e.target.value', e.target.value);
             setOutput('');
-            setOperation(e.target.value);
-            setDisabled(true);
-            if (input) {
+            setInput(e.target.value);
+          }}
+          onBlur={handleSubmit}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSubmit();
+            }
+            e.preventDefault();
+          }}
+        />
+        <Select
+          className={classes.textarea}
+          name="operation"
+          data={['encode URL', 'decode URL', 'decode base64']}
+          value={operation}
+          onChange={(value = '') => {
+            if (!value) return;
+            setOutput('');
+            setOperation(value);
+            setTimeout(() => {
+              handleSubmit();
+            }, 300);
+          }}
+          leftSection={<FontAwesomeIcon icon={faAngleDown} className="pt-[2px] pl-[4px]" />}
+        />
+      </Flex>
+      {!!output && <code className="block px-3 py-2 text-sm">{output}</code>}
+      <div className={`${classes.buttonContainer}`}>
+        <Button
+          className={`${classes.button} text-green-500`}
+          onClick={() => {
+            handleSubmit();
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
               handleSubmit();
             }
           }}
-        />
-      </form>
-      {!disabled && (
-        <TextInput
-          className={classes.textarea}
-          placeholder=""
-          value={output}
-          rightSection={<FontAwesomeIcon icon={faCopy} opacity={0.75} />}
-        />
-      )}
+        >
+          {!!output && <span className="text-xs">copy&ensp;</span>}
+          <FontAwesomeIcon icon={faCopySolid} className="pr-[2px]" />
+        </Button>
+      </div>
     </div>
   );
 }

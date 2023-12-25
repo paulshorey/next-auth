@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSend } from '@fortawesome/sharp-solid-svg-icons';
-import { Button, ButtonGroup, Textarea } from '@mantine/core';
+import { Button, Group, Textarea } from '@mantine/core';
 import classes from './index.module.scss';
 
 export default function HomePhind() {
@@ -23,7 +23,7 @@ export default function HomePhind() {
           }
         }}
       >
-        <ButtonGroup className={classes.inputGroup}>
+        <Group className={classes.inputGroup}>
           <Textarea
             name="q"
             className={classes.textarea}
@@ -46,7 +46,7 @@ export default function HomePhind() {
               <FontAwesomeIcon size="lg" icon={faSend} />
             </Button>
           </div>
-        </ButtonGroup>
+        </Group>
       </form>
     </div>
   );
