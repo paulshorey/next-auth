@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import { Accordion, AccordionValue, Fieldset } from '@mantine/core';
+import { Accordion, AccordionValue } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/pro-regular-svg-icons';
 import styles from './index.module.scss';

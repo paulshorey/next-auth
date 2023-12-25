@@ -21,7 +21,7 @@ export const metadata = {
 export default async function RootLayout({ children }: { children: any }) {
   const session = await sessionGet();
   return (
-    <html lang="en" data-mantine-color-scheme="dark">
+    <html lang="en" data-mantine-color-scheme="dark" suppressHydrationWarning>
       <head>
         <link rel="shortcut icon" href="/favicon.svg" />
         <meta
@@ -34,9 +34,7 @@ export default async function RootLayout({ children }: { children: any }) {
           <MantineProvider defaultColorScheme="dark" theme={theme}>
             <div className="flex w-full" style={{ width: '100%' }}>
               <DrawerWithTrigger />
-              <main className="flex flex-col justify-stretch items-stretch p-1 pt-12 pb-24 min-h-screen w-full">
-                {children}
-              </main>
+              <div className="w-full">{children}</div>
             </div>
             <Toaster
               containerStyle={{

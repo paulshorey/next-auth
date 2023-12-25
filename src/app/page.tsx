@@ -1,17 +1,19 @@
 import * as React from 'react';
-import UserCard from '@/src/components/account/UserCard';
-import { sessionGet } from '@/src/app/auth/actions/session';
+import PageContentHeader from '../components/layout/PageContentHeader';
+import PageContent from '../components/layout/PageContent';
+import HomePhind from '../components/home/Phind';
+import HomeYoutube from '@/src/components/home/Youtube';
+import HomeString from '@/src/components/home/String';
 
 export default async function Home() {
-  let session = await sessionGet();
-
   return (
-    <>
-      {session ? (
-        <UserCard user={session?.user} pagetype={'Home'} />
-      ) : (
-        <h1 className="text-5xl">You Shall Not Pass!</h1>
-      )}
-    </>
+    <div>
+      <PageContentHeader title="Your custom homepage" />
+      <PageContent>
+        <HomePhind />
+        <HomeYoutube />
+        <HomeString />
+      </PageContent>
+    </div>
   );
 }

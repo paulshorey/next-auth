@@ -17,7 +17,7 @@ export default function TopRightAccountDropdown() {
   if (!session.user?.auth && pathname.substring(0, 5) === '/auth') return null;
   return (
     <Group justify="center" className={classes.container}>
-      <HoverCard shadow="lg">
+      <HoverCard shadow="lg" transitionProps={{ duration: 500, transition: 'slide-down' }}>
         <HoverCard.Target>
           <div className={classes.trigger}>
             <div className={classes.triggerContent}>

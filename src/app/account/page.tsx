@@ -9,5 +9,5 @@ export default async function Home() {
     redirect('/auth/signin');
   }
 
-  return <UserCard user={session.user} pagetype="Account" />;
+  return <UserCard user={session.user} />;
 }

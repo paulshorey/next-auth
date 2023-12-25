@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Group } from '@mantine/core';
 import { IconBellRinging, IconKey } from '@tabler/icons-react';
 import Link from 'next/link';
@@ -15,15 +14,24 @@ import AvatarIcon from '../../atoms/AvatarIcon';
 
 const nav = [
   { link: '/', label: 'Home', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
-  { link: '/public', label: 'Public page', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
+  {
+    link: '/public-client',
+    label: 'Public "use client"',
+    Icon: <FontAwesomeIcon size="xl" icon={faFile} />,
+  },
+  {
+    link: '/public-server',
+    label: 'Public "use server"',
+    Icon: <FontAwesomeIcon size="xl" icon={faFile} />,
+  },
   {
     link: '/private-client',
-    label: 'Private (clientside)',
+    label: 'Private "use client"',
     Icon: <FontAwesomeIcon size="xl" icon={faFileExclamation} />,
   },
   {
     link: '/private-server',
-    label: 'Private (server-side)',
+    label: 'Private "use server"',
     Icon: <FontAwesomeIcon size="xl" icon={faFileExclamation} />,
   },
 ];
