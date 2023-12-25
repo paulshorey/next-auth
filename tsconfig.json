@@ -26,7 +26,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    ".archive/auth/xroute.tsx"
+    ".archive/auth/xroute.tsx",
+    "src/functions/document/cookies.js"
   ],
   "exclude": ["node_modules", "tsconfig.json", ".archive"]
 }
