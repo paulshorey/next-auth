@@ -17,5 +17,8 @@ module.exports = {
     'react/no-unescaped-entities': 'off',
     'no-console': 'off',
     '@typescript-eslint/no-use-before-define': 'off',
+    'no-unused-vars': ['warn'],
+    'etc/no-commented-out-code': 'off',
+    'array-callback-return': 'off',
   },
 };

@@ -18,7 +18,7 @@
   height: 100%;
   width: 336px;
   overflow: auto;
-  transition: left 0.6s ease-in-out;
+  transition: left 0.3s ease-in-out;
   background: var(--mantine-color-body);
   &[data-open='true'] {
     left: 0 !important;

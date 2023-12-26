@@ -43,7 +43,7 @@ export default function HomeYoutube() {
               }}
               rightSection={
                 <Button type="submit" className={`${classes.button} text-green-500`}>
-                  <FontAwesomeIcon size="lg" icon={faSend} />
+                  <FontAwesomeIcon icon={faSend} />
                 </Button>
               }
             />

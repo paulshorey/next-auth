@@ -14,6 +14,7 @@ import AvatarIcon from '../../atoms/AvatarIcon';
 
 const nav = [
   { link: '/', label: 'Home', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
+  { link: '/youtube', label: 'YouTube', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
   {
     link: '/public-client',
     label: 'Public "use client"',
@@ -55,23 +56,23 @@ export default function SideNav({ open, setOpen }: any) {
 
   return (
     <nav className={classes.navbar}>
-      <div className={classes.navbarMain}>
+      <div className={classes.navbarContent}>
         <Group className={classes.header} justify="space-between">
-          <Link href="/" className={classes.triggerLogo}>
-            <b className="shadow-md shadow-stone-800">
-              <span className="text-green-500">Techy</span>.Tools
-            </b>
-          </Link>
           <FontAwesomeIcon
             icon={faXmarkLarge}
             className={classes.triggerX}
             onClick={() => setOpen(!open)}
           />
+          <Link href="/" className={classes.triggerLogo}>
+            <b className="shadow-md shadow-stone-800">
+              <span className="text-green-500">Techy</span>.Tools
+            </b>
+          </Link>
         </Group>
-        {links}
+        <div className={classes.navbarLinks}>{links}</div>
       </div>
 
-      {session.user?.auth ? (
+      {/* {session.user?.auth ? (
         <div className={classes.footer}>
           <Link
             href="/account"
@@ -101,7 +102,7 @@ export default function SideNav({ open, setOpen }: any) {
             <span>Sign-up or sign-in</span>
           </Link>
         </div>
-      )}
+      )} */}
     </nav>
   );
 }

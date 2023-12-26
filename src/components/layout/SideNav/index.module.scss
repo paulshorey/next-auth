@@ -6,8 +6,10 @@
   flex-direction: column;
   border-right: 1px solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
 }
-
 .navbarMain {
+  flex: 1;
+}
+.navbarLinks {
   flex: 1;
 }
 
@@ -26,6 +28,7 @@
 .link {
   display: flex;
   align-items: center;
+  justify-content: right;
   text-decoration: none;
   font-size: var(--mantine-font-size-sm);
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-1));
@@ -72,10 +75,10 @@
 }
 .triggerX {
   cursor: pointer;
-  margin-right: 0.5rem;
+  margin-left: 0.8rem;
   opacity: 0.33;
 }
 .triggerLogo {
   cursor: pointer;
-  margin-left: 0.8rem;
+  margin-right: 0.5rem;
 }

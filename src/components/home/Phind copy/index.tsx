@@ -3,21 +3,15 @@
 import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSend } from '@fortawesome/sharp-solid-svg-icons';
-import { Button, Group, Textarea } from '@mantine/core';
+import { Button, ButtonGroup, Textarea } from '@mantine/core';
 import classes from './index.module.scss';
 
 export default function HomePhind() {
-  const [previousKey, setPreviousKey] = React.useState('');
   const [value, setValue] = React.useState('');
   const formRef = React.useRef<HTMLFormElement>(null);
   return (
-    <div className={`${classes.container} pb-6`}>
-      <div className="flex flex-row justify-between">
-        <h2 className={`${classes.title}`}>Phind.com</h2>
-        <span className={classes.titleTip}>
-          press <b>Shift</b> + <b>Cmd</b> + <b>Enter</b> to submit
-        </span>
-      </div>
+    <div className={classes.container}>
+      <h2 className={`${classes.title}`}>Phind.com</h2>
       <form
         ref={formRef}
         method="GET"
@@ -29,27 +23,16 @@ export default function HomePhind() {
           }
         }}
       >
-        <Group className={classes.inputGroup}>
+        <ButtonGroup className={classes.inputGroup}>
           <Textarea
             name="q"
             className={classes.textarea}
             placeholder="Ask a technical or programming question. Include links and code blocks..."
             onKeyDown={(e) => {
-              if (
-                (previousKey === 'Shift' || previousKey === 'Meta') &&
-                (e.key === 'Shift' || e.key === 'Meta')
-              ) {
-                setPreviousKey(previousKey + e.key);
-              } else {
-                setPreviousKey(e.key);
-              }
-              console.log(previousKey, e.key);
-              if (
-                (previousKey === 'ShiftMeta' || previousKey === 'MetaShift') &&
-                e.key === 'Enter'
-              ) {
+              if (e.key === 'Enter') {
                 e.preventDefault();
-                if (e.currentTarget.value) {
+                // @ts-ignore
+                if (e.target.value) {
                   formRef.current?.submit();
                 }
               }
@@ -58,12 +41,12 @@ export default function HomePhind() {
               setValue(e.currentTarget.value);
             }}
           />
-          {/* <div className={classes.buttonContainer}>
+          <div className={classes.buttonContainer}>
             <Button type="submit" className={`${classes.button} text-green-500`}>
-              <FontAwesomeIcon size="lg" icon={faSend} />
+              <FontAwesomeIcon size="xl" icon={faSend} />
             </Button>
-          </div> */}
-        </Group>
+          </div>
+        </ButtonGroup>
       </form>
     </div>
   );

@@ -12,6 +12,7 @@ export default function HomeYoutube() {
   const [input, setInput] = React.useState('');
   const [output, setOutput] = React.useState('');
   const [operation, setOperation] = React.useState('encode URL');
+  const [previousKey, setPreviousKey] = React.useState('');
   const handleSubmit = () => {
     if (!operation || !input) return;
     try {
@@ -52,9 +53,9 @@ export default function HomeYoutube() {
           onBlur={handleSubmit}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
+              e.preventDefault();
               handleSubmit();
             }
-            e.preventDefault();
           }}
         />
         <Select
