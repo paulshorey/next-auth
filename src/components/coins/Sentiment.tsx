@@ -16,14 +16,14 @@ export default function Sentiment({ ticker, times }: Props) {
   const coin = ticker.split('USD')[0];
   return (
     <div className="grid grid-cols-7 w-full m-1">
-      <h3 className="">{coin}</h3>
+      <h3 className="p-1">{coin}</h3>
       {Object.entries(times)
         .reverse()
         .map(([time, [last, past]]: any, i) =>
           !last ? null : (
             <span
               key={time}
-              className={classes.sentiment + ' p-1 text-center'}
+              className={classes.sentiment + ' p-1'}
               data-s1={last.delta > 1 ? 'BUY' : last.delta < -1 ? 'SELL' : 'HODL'}
               data-s2={last.score > 70 ? 'high' : last.score < 30 ? 'low' : 'middle'}
             >

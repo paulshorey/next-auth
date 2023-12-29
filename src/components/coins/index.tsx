@@ -35,6 +35,25 @@ export default function Coins({ coins, debug, options = {} }: Props) {
           <Sentiment ticker={ticker} times={times} />
         </div>
       ))}
+      <div></div>
+      <div className="grid grid-cols-7 w-full m-1 mt-7 pt-7 border-t border-stone-700">
+        <h3 className={' p-1'}>Legend</h3>
+        <div className={classes.sentiment + ' p-1'} data-s1={'BUY'} data-s2={'low'}>
+          Buy!!!
+        </div>
+        <div className={classes.sentiment + ' p-1'} data-s1={'BUY'} data-s2={'middle'}>
+          Buy
+        </div>
+        <div className={classes.sentiment + ' p-1'} data-s1={'HODL'} data-s2={'middle'}>
+          Hodl
+        </div>
+        <div className={classes.sentiment + ' p-1'} data-s1={'SELL'} data-s2={'middle'}>
+          Sell
+        </div>
+        <div className={classes.sentiment + ' p-1'} data-s1={'SELL'} data-s2={'high'}>
+          Sell!!!
+        </div>
+      </div>
     </PageContentLayout>
   );
 }

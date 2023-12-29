@@ -25,8 +25,8 @@ export default async function PageCrypto() {
         }
         subtitle={
           <div className="font-extralight tracking-wide pb-1">
-            robot financial adviser
-            {/* - no emotions or financial incentives - just accurate data analysis */}
+            r.s.i. sentiment analysis
+            {/* robot financial adviser - no emotions or incentives - just accurate analysis */}
           </div>
         }
       />

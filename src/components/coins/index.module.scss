@@ -1,5 +1,6 @@
 
 .sentiment {
+  text-align:center;
   &[data-s1="BUY"] {
     background: rgba(0, 128, 0, 0.25);
     &[data-s2="low"] {
