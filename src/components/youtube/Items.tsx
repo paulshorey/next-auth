@@ -3,11 +3,7 @@ import { videoType } from '@/src/app/youtube/page';
 import classes from './index.module.scss';
 import Screenshots from './Screenshots';
 
-type Props = {
-  debug?: boolean;
-  thumbScale?: number;
-  items?: videoType[];
-};
+type Props = any;
 
 export default function Items({ thumbScale = 2, items, debug, options = {} }: Props) {
   if (!items) return <p>Loading...</p>;

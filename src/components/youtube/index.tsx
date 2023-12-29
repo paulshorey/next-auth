@@ -15,7 +15,7 @@ export default function YouTubeResultsTemplate({ items, options }: any) {
       </div>
       <div className="flex my-6 w-full">
         <div className="pl-[1.44rem] inline-block">
-          <VideoItems items={items} thumbScale={2} options={options} />
+          <VideoItems items={items} thumbScale={2} />
         </div>
         <div className="pl-[1.44rem]">Organize your YouTube playlists...</div>
       </div>
