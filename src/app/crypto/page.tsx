@@ -3,6 +3,7 @@ import * as React from 'react';
 import PageContentHeader from '@/src/components/layout/PageContentHeader';
 import Coins from '@/src/components/coins';
 import useSwr from 'swr';
+import PageContentLayout from '@/src/components/layout/PageContent';
 
 export type coinType = any;
 
@@ -38,7 +39,9 @@ export default function PageCrypto() {
         }
       />
       {!!isLoading ? (
-        <div>...loading new data... ...it takes 10-15 seconds...</div>
+        <PageContentLayout className="text-center">
+          <b>...loading new data...</b> ...it can take 10-15 seconds...
+        </PageContentLayout>
       ) : !!error ? (
         <pre>
           <code>{JSON.stringify(error, null, 2)}</code>
