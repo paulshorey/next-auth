@@ -35,23 +35,38 @@ export default function Coins({ coins, debug, options = {} }: Props) {
           <Sentiment ticker={ticker} times={times} />
         </div>
       ))}
-      <div></div>
-      <div className="grid grid-cols-7 w-full m-1 mt-7 pt-7 border-t border-stone-700">
-        <h3 className={' p-1'}>Legend</h3>
+      <div className=" mt-7 pt-5 border-t border-stone-700 text-center text-stone-500">
+        <b>Game play:</b> Buy/Sell when 5-in-a-row are all green/red. Whoever does this it
+        consistently gets rich!
+      </div>
+      <div className="grid grid-cols-5 w-full mt-5">
         <div className={classes.sentiment + ' p-1'} data-s1={'BUY'} data-s2={'low'}>
           Buy!!!
+          <hr />
+          bullish &gt; 1<br />
+          rsi &lt; 30
         </div>
         <div className={classes.sentiment + ' p-1'} data-s1={'BUY'} data-s2={'middle'}>
           Buy
+          <hr />
+          bullish &gt; 1
         </div>
         <div className={classes.sentiment + ' p-1'} data-s1={'HODL'} data-s2={'middle'}>
           Hodl
+          <hr />
+          balanced
         </div>
         <div className={classes.sentiment + ' p-1'} data-s1={'SELL'} data-s2={'middle'}>
           Sell
+          <hr />
+          bearish &lt; -1
         </div>
         <div className={classes.sentiment + ' p-1'} data-s1={'SELL'} data-s2={'high'}>
           Sell!!!
+          <hr />
+          bearish &lt; -1
+          <br />
+          rsi &gt; 70
         </div>
       </div>
     </PageContentLayout>

@@ -15,7 +15,7 @@ export default function Sentiment({ ticker, times }: Props) {
   // };
   const coin = ticker.split('USD')[0];
   return (
-    <div className="grid grid-cols-7 w-full m-1">
+    <div className="grid grid-cols-7 w-full">
       <h3 className="p-1">{coin}</h3>
       {Object.entries(times)
         .reverse()
