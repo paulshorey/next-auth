@@ -39,7 +39,8 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
     "sass": "^1.69.5",
-    "stytch": "^10.0.2"
+    "stytch": "^10.0.2",
+    "swr": "^2.2.4"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^14.0.1",

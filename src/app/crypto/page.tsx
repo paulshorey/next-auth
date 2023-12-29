@@ -1,6 +1,8 @@
+'use client';
 import * as React from 'react';
 import PageContentHeader from '@/src/components/layout/PageContentHeader';
 import Coins from '@/src/components/coins';
+import useSwr from 'swr';
 
 export type coinType = any;
 
@@ -8,10 +10,15 @@ function Sp({ w = 1 }: { w?: number }) {
   return <span style={{ display: 'inline-block', width: `${w}px` }} />;
 }
 
-export default async function PageCrypto() {
-  const coins = await fetch('https://crypto-sentiment.paulshorey.workers.dev/get?x=1', {
-    // cache: 'no-cache',
-  }).then((res) => res.json());
+function fetcher(url: string) {
+  return fetch(url).then((r) => r.json());
+}
+
+export default function PageCrypto() {
+  const { data, error, isLoading } = useSwr(
+    'https://crypto-sentiment.paulshorey.workers.dev/get?x=1',
+    fetcher
+  );
   return (
     <div>
       <PageContentHeader
@@ -30,7 +37,15 @@ export default async function PageCrypto() {
           </div>
         }
       />
-      <Coins coins={coins} options={{}} />
+      {!!isLoading ? (
+        <div>...loading new data... ...it takes 10-15 seconds...</div>
+      ) : !!error ? (
+        <pre>
+          <code>{JSON.stringify(error, null, 2)}</code>
+        </pre>
+      ) : (
+        <Coins coins={data} options={{}} />
+      )}
     </div>
   );
 }
