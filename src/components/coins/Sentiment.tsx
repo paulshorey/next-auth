@@ -9,6 +9,7 @@ type Props = {
 };
 
 export default function Sentiment({ alerts, debug, options = {} }: Props) {
+  if (!alerts) return <p>No data</p>;
   let sentiment = [
     {
       timeframe: '5',
