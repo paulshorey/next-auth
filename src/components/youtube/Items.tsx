@@ -9,7 +9,7 @@ type Props = {
   items?: videoType[];
 };
 
-export default function Items({ thumbScale = 2, items, debug }: Props) {
+export default function Items({ thumbScale = 2, items, debug, options = {} }: Props) {
   if (!items) return <p>Loading...</p>;
   if (debug) {
     return (
@@ -28,7 +28,7 @@ export default function Items({ thumbScale = 2, items, debug }: Props) {
             target="_blank"
             rel="noreferrer"
           >
-            <Screenshots item={item} thumbScale={thumbScale} />
+            <Screenshots item={item} thumbScale={thumbScale} options={options} />
           </a>
           <h3 className={classes.videoTitle}>{item.title}</h3>
           <p className={classes.videoText}>{item.description}</p>

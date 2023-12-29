@@ -1,9 +1,9 @@
 'use client';
 
 // import Link from 'next/link';
-import VideoItems from '@/src/components/youtube/Items';
+import Coins from '@/src/components/coins/Coins';
 
-export default function YouTubeResultsTemplate({ items, options }: any) {
+export default function CryptoResultsTemplate({ coins, options }: any) {
   return (
     <div>
       <div className="flex justify-between py-3 px-4 mx-[1.44rem] border-t border-b border-stone-600">
@@ -15,9 +15,9 @@ export default function YouTubeResultsTemplate({ items, options }: any) {
       </div>
       <div className="flex my-6 w-full">
         <div className="pl-[1.44rem] inline-block">
-          <VideoItems items={items} thumbScale={2} options={options} />
+          <Coins coins={coins} options={options} />
         </div>
-        <div className="pl-[1.44rem]">Organize your YouTube playlists...</div>
+        <div className="pl-[1.44rem]">Organize your Crypto playlists...</div>
       </div>
     </div>
   );

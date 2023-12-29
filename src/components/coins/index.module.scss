@@ -1,0 +1,18 @@
+
+.sentiment {
+  &[data-s1="BUY"] {
+    color: green;
+    &[data-s2="low"] {
+      border: solid 1px green;
+    }
+  }
+  &[data-s1="HODL"] {
+    color: grey;
+  }
+  &[data-s1="SELL"] {
+    color: red;
+  &[data-s2="high"] {
+    border: solid 1px red;
+  }
+  }
+}

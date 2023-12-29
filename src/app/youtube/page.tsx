@@ -42,7 +42,9 @@ export default async function PageYoutube({
   // &location=${encodeURIComponent(`${local.lat},${local.lon}`)}&locationRadius=10mi
   // ${qs.q || ''}&pageToken=${qs.pageToken || ''}
   let data = await fetch(
-    'https://www.googleapis.com/youtube/v3/search?part=id%2Csnippet&videoDuration=long&type=video&maxResults=50&order=relevance&publishedAfter=2023-02-02T00:00:00Z&regionCode=CA&relevanceLanguage=en&key=AIzaSyCdhDduY2qpqfzOr4TDBbSbUSe2si6pZ2s&q=hello'
+    `https://www.googleapis.com/youtube/v3/search?q=${encodeURIComponent(
+      'crypto trading bot'
+    )}&part=id%2Csnippet&videoDuration=long&type=video&maxResults=50&order=relevance&publishedAfter=2023-02-02T00:00:00Z&regionCode=CA&relevanceLanguage=en&key=AIzaSyCdhDduY2qpqfzOr4TDBbSbUSe2si6pZ2s`
   ).then((res) => res.json());
   if (!data?.items) {
     console.error('No data.items. Probably out of credits again.', data);
@@ -102,8 +104,10 @@ export default async function PageYoutube({
         }
       />
       <YouTubeResultsTemplate
-        data={{
-          items,
+        items={items}
+        options={{
+          screenshots: false,
+          thumbnail: false,
           prevPageToken: data.prevPageToken,
           nextPageToken: data.nextPageToken,
         }}
