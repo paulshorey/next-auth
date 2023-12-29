@@ -1,24 +1,40 @@
-'use client';
+import React from 'react';
+import { coinType } from '@/src/app/crypto/page';
+import classes from './index.module.scss';
+import Sentiment from './Sentiment';
+import PageContentLayout from '../layout/PageContent';
 
-// import Link from 'next/link';
-import Coins from '@/src/components/coins/Coins';
+type Props = {
+  debug?: boolean;
+  coins?: coinType[];
+  options?: any;
+};
 
-export default function CryptoResultsTemplate({ coins, options }: any) {
+export default function Coins({ coins, debug, options = {} }: Props) {
+  if (!coins) return <p>Loading...</p>;
+  if (debug) {
+    return (
+      <pre>
+        <code>{JSON.stringify(coins, null, 2)}</code>
+      </pre>
+    );
+  }
   return (
-    <div>
-      <div className="flex justify-between py-3 px-4 mx-[1.44rem] border-t border-b border-stone-600">
-        Options...
-        {!!options.prevPageToken && (
-          <a href={`?pageToken=${options.prevPageToken}`}>Previous page </a>
-        )}
-        {!!options.nextPageToken && <a href={`?pageToken=${options.nextPageToken}`}>Next page</a>}
+    <PageContentLayout className="flex flex-col">
+      <div className="grid grid-cols-7 w-full mx-1 mb-6 text-center text-stone-500">
+        <div></div>
+        <div>Month</div>
+        <div>Week</div>
+        <div>Day</div>
+        <div>4hr</div>
+        <div>45min</div>
+        <div>5min</div>
       </div>
-      <div className="flex my-6 w-full">
-        <div className="pl-[1.44rem] inline-block">
-          <Coins coins={coins} options={options} />
+      {Object.entries(coins).map(([ticker, times]: any, i) => (
+        <div key={ticker} className={classes.coin + ' mb-6'}>
+          <Sentiment ticker={ticker} times={times} />
         </div>
-        <div className="pl-[1.44rem]">Organize your Crypto playlists...</div>
-      </div>
-    </div>
+      ))}
+    </PageContentLayout>
   );
 }

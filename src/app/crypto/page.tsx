@@ -9,8 +9,8 @@ function Sp({ w = 1 }: { w?: number }) {
 }
 
 export default async function PageCrypto() {
-  const coins = await fetch('https://crypto-sentiment.paulshorey.workers.dev/get', {
-    cache: 'no-cache',
+  const coins = await fetch('https://crypto-sentiment.paulshorey.workers.dev/get?x=1', {
+    // cache: 'no-cache',
   }).then((res) => res.json());
   return (
     <div>
@@ -23,7 +23,12 @@ export default async function PageCrypto() {
             ai / crypto
           </div>
         }
-        subtitle={<div className="font-extralight tracking-wide pb-1">robot financial adviser</div>}
+        subtitle={
+          <div className="font-extralight tracking-wide pb-1">
+            robot financial adviser
+            {/* - no emotions or financial incentives - just accurate data analysis */}
+          </div>
+        }
       />
       <Coins coins={coins} options={{}} />
     </div>

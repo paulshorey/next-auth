@@ -1,7 +1,7 @@
 'use client';
 
 import { Group } from '@mantine/core';
-import { IconBellRinging, IconKey } from '@tabler/icons-react';
+// import { IconBellRinging, IconKey } from '@tabler/icons-react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkLarge } from '@fortawesome/pro-regular-svg-icons';
@@ -10,10 +10,11 @@ import * as React from 'react';
 import { usePathname } from 'next/navigation';
 import classes from './index.module.scss';
 import { SessionContext } from '@/src/context/SessionProvider';
-import AvatarIcon from '../../atoms/AvatarIcon';
+// import AvatarIcon from '../../atoms/AvatarIcon';
 
 const nav = [
   { link: '/', label: 'Home', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
+  { link: '/crypto', label: 'Crypto', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
   { link: '/youtube', label: 'YouTube', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
   {
     link: '/public-client',
