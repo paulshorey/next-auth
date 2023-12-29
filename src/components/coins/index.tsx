@@ -36,8 +36,14 @@ export default function Coins({ coins, debug, options = {} }: Props) {
         </div>
       ))}
       <div className=" mt-7 pt-5 border-t border-stone-700 text-center text-stone-500">
-        <b>Game play:</b> Buy/Sell when 5-in-a-row are all green/red. Whoever does this it
-        consistently gets rich!
+        <b>Instructions:</b> Buy/Sell immediately when 5-in-a-row are green/red. Patience is
+        important. HODL!
+        {/* <br />
+        Obviously, higher-order timeframes are more important than the short term. But if you don't
+        mind watching it closely and day trading, you could make it work in the short term without
+        the monthly. */}
+        {/* If you do buy/sell, then make sure to catch the very next subsequent buy/sell. <br /> */}
+        {/* Coming soon: a current and historical list of optimal buy/sell times. */}
       </div>
       <div className="grid grid-cols-5 w-full mt-5">
         <div className={classes.sentiment + ' p-1'} data-s1={'BUY'} data-s2={'low'}>

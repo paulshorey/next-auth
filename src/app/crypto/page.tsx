@@ -8,7 +8,7 @@ import PageContentLayout from '@/src/components/layout/PageContent';
 export type coinType = any;
 
 function Sp({ w = 1 }: { w?: number }) {
-  return <span style={{ display: 'inline-block', width: `${w}px` }} />;
+  return <span style={{ display: 'inline-block', width: `${w * 0.5}px` }} />;
 }
 
 function fetcher(url: string) {
@@ -28,19 +28,21 @@ export default function PageCrypto() {
             nohype
             <Sp w={1} />
             .<Sp w={1} />
-            ai / crypto
+            ai
+            <Sp w={3} />/<Sp w={3} />
+            crypto
           </div>
         }
         subtitle={
           <div className="font-extralight tracking-wide pb-1">
-            r.s.i. sentiment analysis
+            rsi sentiment per timeframe
             {/* robot financial adviser - no emotions or incentives - just accurate analysis */}
           </div>
         }
       />
       {!!isLoading ? (
         <PageContentLayout className="text-center">
-          <b>...loading new data...</b> ...it can take 10-15 seconds...
+          <b>...loading new data...</b> ...takes 15 seconds...
         </PageContentLayout>
       ) : !!error ? (
         <pre>
