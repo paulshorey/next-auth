@@ -37,10 +37,10 @@ export default function Coins({ coins, debug, options = {} }: Props) {
       <div className=" mt-7 pt-6 border-t border-stone-700 text-center text-stone-500">
         This tool helps find reversals in buying/selling trends, or to "time the market".
         <br />
-        BUY/SELL when ALL 5 cells in the row turn green/red, but ONLY IF they have recently* been
-        the opposite!
+        BUY/SELL when ALL 5 cells in the row turn green/red!
         <br />
-        (*Not time, but how many of buy/sell alerts (5-in-a-row) have been since last reversal.)
+        But if not buying/shorting right after a reversal, be careful to not buy/short the
+        peak/trough!
         <br />
         This obviously requires staring at the chart all day and night for months.
         <br />
