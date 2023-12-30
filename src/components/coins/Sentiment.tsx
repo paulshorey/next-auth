@@ -27,15 +27,11 @@ export default function Sentiment({ ticker, times }: Props) {
           if (last.delta < -1) score--;
           if (last.score > 80) score--;
           if (last.score < 40) score++;
+          if (score > 1) score = 1;
+          if (score < -1) score = -1;
           return (
             <span key={time} className={classes.sentimentContainer}>
-              <span
-                className={classes.sentiment}
-                data-score={score.toString()}
-                data-s1={last.delta > 1 ? 'BUY' : last.delta < -1 ? 'SELL' : 'HODL'}
-                data-s2={last.score > 70 ? 'high' : last.score < 40 ? 'low' : 'middle'}
-                data-s3={last.score > 80 ? 'high' : last.score < 30 ? 'low' : 'middle'}
-              >
+              <span className={classes.sentiment} data-score={score.toString()}>
                 {/* {Math.round(Number(last.delta))} */}
               </span>
             </span>
