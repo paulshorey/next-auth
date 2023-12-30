@@ -35,24 +35,33 @@ export default function Coins({ coins, debug, options = {} }: Props) {
         </div>
       ))}
       <div className=" mt-7 pt-6 border-t border-stone-700 text-center text-stone-500">
+        This tool helps find reversals in buying/selling trends, or to "time the market".
+        <br />
+        BUY/SELL when ALL 5 cells in the row turn green/red, but ONLY IF they have recently been the
+        opposite!
+        <br />
+        This is almost impossible for a human to catch at the right time.
+        <br />
+        Alerts and trading bot coming soon!
+        <br />
         RSI &gt; 80 ⇒ -1 &emsp; RSI&lt;Avg ⇒ -1 &emsp; RSI&gt;Avg ⇒ +1 &emsp; RSI &lt; 40 ⇒ +1
       </div>
-      <div className="grid grid-cols-5 w-full mt-5">
-        <div className={`${classes.sentiment}`} data-score="-2">
+      <div className="grid grid-cols-3 w-full mt-5">
+        {/* <div className={`${classes.sentiment}`} data-score="-2">
           <span className="absolute">-2</span>
-        </div>
+        </div> */}
         <div className={`${classes.sentiment}`} data-score="-1">
-          <span className="absolute">-1</span>
+          - bearish
         </div>
         <div className={`${classes.sentiment}`} data-score="0">
-          <span className="absolute">0</span>
+          0 hodl
         </div>
         <div className={`${classes.sentiment}`} data-score="1">
-          <span className="absolute">1</span>
+          + bullish
         </div>
-        <div className={`${classes.sentiment}`} data-score="2">
+        {/* <div className={`${classes.sentiment}`} data-score="2">
           <span className="absolute">2</span>
-        </div>
+        </div> */}
       </div>
     </PageContentLayout>
   );
