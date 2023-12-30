@@ -1,7 +1,8 @@
 
 .sentiment {
-  border: solid 2px transparent;
+  border-bottom: solid 0.25rem transparent;
   text-align:center;
+  color: rgba(255,255,255,0.5);
   &[data-s2="high"] {
     border-color: rgba(255, 0, 0, 0.25);
   }

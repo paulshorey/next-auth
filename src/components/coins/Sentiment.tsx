@@ -23,7 +23,7 @@ export default function Sentiment({ ticker, times }: Props) {
           !last ? null : (
             <span
               key={time}
-              className={classes.sentiment + ' p-1'}
+              className={classes.sentiment + ' p-1 pb-0 text-sm'}
               data-s1={last.delta > 1 ? 'BUY' : last.delta < -1 ? 'SELL' : 'HODL'}
               data-s2={last.score > 70 ? 'high' : last.score < 40 ? 'low' : 'middle'}
               data-s3={last.score > 80 ? 'high' : last.score < 30 ? 'low' : 'middle'}
