@@ -40,7 +40,7 @@ export default function Coins({ coins, debug, options = {} }: Props) {
         BUY/SELL when ALL 5 cells in the row turn green/red, but ONLY IF they have recently* been
         the opposite!
         <br />
-        (*Not time, but how many of buy/sell events (5-in-a-row) have happened since last reversal.)
+        (*Not time, but how many of buy/sell alerts (5-in-a-row) have been since last reversal.)
         <br />
         This obviously requires staring at the chart all day and night for months.
         <br />
