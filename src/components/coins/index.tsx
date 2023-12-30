@@ -60,7 +60,9 @@ export default function Coins({ coins, debug, options = {} }: Props) {
         <div className={classes.sentiment + ' p-1'} data-s1={'HODL'} data-s2={'middle'}>
           Hodl
           <hr />
-          balanced
+          {/* uncertain */}
+          <div className="border-red-800 border-2 mt-1">rsi &gt; 70</div>
+          <div className="border-green-700 border-2 mt-1">rsi &lt; 30</div>
         </div>
         <div className={classes.sentiment + ' p-1'} data-s1={'SELL'} data-s2={'middle'}>
           Sell
