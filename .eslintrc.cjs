@@ -20,5 +20,6 @@ module.exports = {
     'no-unused-vars': ['warn'],
     'etc/no-commented-out-code': 'off',
     'array-callback-return': 'off',
+    'no-plusplus': 'off',
   },
 };

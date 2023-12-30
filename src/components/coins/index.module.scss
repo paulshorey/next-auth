@@ -1,27 +1,25 @@
-
+.sentimentContainer {
+  width: 100%;
+}
 .sentiment {
-  border-bottom: solid 0.25rem transparent;
-  text-align:center;
-  color: rgba(255,255,255,0.5);
-  &[data-s2="high"] {
-    border-color: rgba(255, 0, 0, 0.25);
+  display: block;
+  width: 100%;
+  border: solid 0.5rem transparent;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  &[data-score='2'] {
+    border-color: rgba(0, 200, 0, 0.5);
   }
-  &[data-s2="low"] {
-    border-color: rgba(0, 255, 0, 0.25);
-  }
-  &[data-s3="high"] {
-    border-color: rgba(255, 0, 0, 0.5);
-  }
-  &[data-s3="low"] {
-    border-color: rgba(0, 255, 0, 0.5);
-  }
-  &[data-s1="BUY"] {
+  &[data-score='1'] {
     background: rgba(0, 128, 0, 0.25);
   }
-  &[data-s1="HODL"] {
+  &[data-score='0'] {
     background: rgba(128, 128, 128, 0.33);
   }
-  &[data-s1="SELL"] {
+  &[data-score='-1'] {
     background: rgba(255, 0, 0, 0.125);
+  }
+  &[data-score='-2'] {
+    border-color: rgba(200, 0, 0, 0.5);
   }
 }

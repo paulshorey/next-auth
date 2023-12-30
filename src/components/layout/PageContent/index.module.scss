@@ -11,12 +11,12 @@
   // flex-direction: column;
   // align-items: center;
   min-height: 100vh;
-  width: calc(100% - 2.5rem);
+  width: calc(100% - 2rem);
   max-width: 780px;
   margin: 0 auto;
   border-top: solid 1px rgba(255, 255, 255, 0.1);
-  padding: 2rem 0 2rem 2px;
+  padding: 2rem 0;
   &[data-width='full'] {
-    max-width: calc(100% - 2.5rem);
+    max-width: calc(100% - 2rem);
   }
 }
