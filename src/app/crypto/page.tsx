@@ -42,7 +42,7 @@ export default function PageCrypto() {
       />
       {!!isLoading ? (
         <PageContentLayout className="text-center">
-          <b>...loading new data...</b> ...takes 15 seconds...
+          <b>...loading new data...</b> ...takes 30 seconds...
         </PageContentLayout>
       ) : !!error ? (
         <pre>
