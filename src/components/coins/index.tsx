@@ -40,7 +40,7 @@ export default function Coins({ coins, debug, options = {} }: Props) {
         BUY/SELL when ALL 5 cells in the row turn green/red, but ONLY IF they have recently been the
         opposite!
         <br />
-        This is almost impossible for a human to catch at the right time.
+        This obviously requires staring at the chart all day and night non-stop.
         <br />
         Alerts and trading bot coming soon!
         <br />
