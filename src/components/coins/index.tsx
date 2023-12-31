@@ -21,30 +21,28 @@ export default function Coins({ coins, debug, options = {} }: Props) {
   }
   return (
     <PageContentLayout className="flex flex-col">
-      <div className="grid grid-cols-6 w-full mx-1 mb-6 text-center text-stone-500">
+      <div className="grid grid-cols-7 w-full mx-1 mb-6 text-center text-stone-500">
         <div />
         <div>M</div>
         <div>W</div>
         <div>D</div>
         <div>4h</div>
         <div>45</div>
+        <div />
       </div>
-      {Object.entries(coins).map(([ticker, times]: any, i) => (
+      {Object.entries(coins).map(([ticker, times]: any) => (
         <div key={ticker} className={`${classes.coin}`}>
           <Sentiment ticker={ticker} times={times} />
         </div>
       ))}
       <div className=" mt-7 pt-6 border-t border-stone-700 text-center text-stone-500">
-        This tool helps find reversals in buying/selling trends, or to "time the market".
+        This tool helps find reversals in buying/selling trends, to "time the market".
         <br />
-        BUY/SELL when ALL 5 cells in the row turn green/red!
+        Buy/sell when all 5 cells in the row have turned green/red!
         <br />
-        But if not buying/shorting right after a reversal, be careful to not buy/short the
-        peak/trough!
+        Preferably after a reversal, after they were recently all the same but opposite color.
         <br />
-        This obviously requires staring at the chart all day and night for months.
-        <br />
-        Alerts and trading bot coming soon!
+        This timing is impossible for humans to do reliably. Alerts and bot coming soon!
         <br />
         RSI &gt; 80 ⇒ -1 &emsp; RSI&lt;Avg ⇒ -1 &emsp; RSI&gt;Avg ⇒ +1 &emsp; RSI &lt; 40 ⇒ +1
       </div>

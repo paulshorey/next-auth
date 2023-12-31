@@ -14,14 +14,20 @@ export default function Sentiment({ ticker, times }: Props) {
   //   M: '1month',
   // };
   const coin = ticker.split('USD')[0];
+  let latestTimestamp = 0;
+  let price = 0;
   return (
-    <div className="grid grid-cols-6 w-full">
+    <div className="grid grid-cols-7 w-full">
       <h3 className="mt-[-0.33rem] ml-[-0.11rem] mb-6">{coin}</h3>
       {Object.entries(times)
         .reverse()
         .map(([time, [last, past]]: any, i) => {
           if (time === '5') return null;
           if (!last) return null;
+          if (last.timestamp > latestTimestamp) {
+            latestTimestamp = last.timestamp;
+            price = last.price.toFixed(2);
+          }
           let score = 0;
           if (last.delta > 1) score++;
           if (last.delta < -1) score--;
@@ -32,11 +38,12 @@ export default function Sentiment({ ticker, times }: Props) {
           return (
             <span key={time} className={classes.sentimentContainer}>
               <span className={classes.sentiment} data-score={score.toString()}>
-                {/* {Math.round(Number(last.delta))} */}
+                {Math.round(Number(last.score))} &ensp; ({Math.round(Number(last.delta))})
               </span>
             </span>
           );
         })}
+      <div className="text-right">$&thinsp;{price}</div>
     </div>
   );
 }
