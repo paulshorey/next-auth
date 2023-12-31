@@ -8,7 +8,7 @@ export default async function Home() {
       <div className="page-width">
         <HomeComponent />
       </div>
-      <div className="page-width-full">
+      <div className="page-width-full page-border-top">
         <Coins view="minimal" />
       </div>
     </div>

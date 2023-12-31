@@ -20,9 +20,9 @@ export default function Coins({ debug, view = 'full' }: Props) {
 
   if (isLoading) {
     return (
-      <PageContentLayout className="text-center">
+      <div className="text-center py-24">
         <b>...loading new data...</b> ...takes 30 seconds...
-      </PageContentLayout>
+      </div>
     );
   }
   if (error) {
@@ -33,16 +33,8 @@ export default function Coins({ debug, view = 'full' }: Props) {
     );
   }
 
-  if (!data) return <p>Loading...</p>;
-  if (debug) {
-    return (
-      <pre>
-        <code>{JSON.stringify(data, null, 2)}</code>
-      </pre>
-    );
-  }
   return (
-    <div className="flex flex-col lg:px-2 max-w-[1130px] mx-auto">
+    <div className="flex flex-col lg:px-2 max-w-[1130px] mx-auto pt-12">
       {view !== 'minimal' && (
         <div className="grid grid-cols-7 w-full mx-1 mb-6 text-center text-stone-500">
           <div />
