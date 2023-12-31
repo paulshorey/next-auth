@@ -21,5 +21,6 @@ module.exports = {
     'etc/no-commented-out-code': 'off',
     'array-callback-return': 'off',
     'no-plusplus': 'off',
+    'no-empty-pattern': 'off',
   },
 };

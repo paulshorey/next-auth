@@ -1,25 +1,12 @@
-'use client';
 import * as React from 'react';
 import PageContentHeader from '@/src/components/layout/PageContentHeader';
 import Coins from '@/src/components/coins';
-import useSwr from 'swr';
-import PageContentLayout from '@/src/components/layout/PageContent';
-
-export type coinType = any;
 
 function Sp({ w = 1 }: { w?: number }) {
   return <span style={{ display: 'inline-block', width: `${w * 0.5}px` }} />;
 }
 
-function fetcher(url: string) {
-  return fetch(url).then((r) => r.json());
-}
-
 export default function PageCrypto() {
-  const { data, error, isLoading } = useSwr(
-    'https://crypto-sentiment.paulshorey.workers.dev/get?x=1',
-    fetcher
-  );
   return (
     <div>
       <PageContentHeader
@@ -40,17 +27,7 @@ export default function PageCrypto() {
           </div>
         }
       />
-      {!!isLoading ? (
-        <PageContentLayout className="text-center">
-          <b>...loading new data...</b> ...takes 30 seconds...
-        </PageContentLayout>
-      ) : !!error ? (
-        <pre>
-          <code>{JSON.stringify(error, null, 2)}</code>
-        </pre>
-      ) : (
-        <Coins coins={data} options={{}} />
-      )}
+      <Coins />
     </div>
   );
 }

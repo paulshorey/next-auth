@@ -13,7 +13,7 @@ export default function HomePhind() {
   return (
     <div className={`${classes.container} pb-6`}>
       <div className="flex flex-row justify-between">
-        <h2 className={`${classes.title}`}>Phind.com</h2>
+        <h2 className={`${classes.title}`}>Perplexity.com</h2>
         <span className={classes.titleTip}>
           press <b>Shift</b> + <b>Cmd</b> + <b>Enter</b> to submit
         </span>
@@ -21,7 +21,7 @@ export default function HomePhind() {
       <form
         ref={formRef}
         method="GET"
-        action="https://phind.com/search"
+        action="https://perplexity.com"
         target="_blank"
         onSubmit={(e) => {
           if (!value) {
@@ -33,7 +33,7 @@ export default function HomePhind() {
           <Textarea
             name="q"
             className={classes.textarea}
-            placeholder="Ask a technical or programming question. Include links and code blocks..."
+            placeholder="Ask any question. This AI will search the web..."
             onKeyDown={(e) => {
               if (
                 (previousKey === 'Shift' || previousKey === 'Meta') &&

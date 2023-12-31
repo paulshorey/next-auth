@@ -1,19 +1,16 @@
 import * as React from 'react';
-import PageContentHeader from '../components/layout/PageContentHeader';
-import PageContent from '../components/layout/PageContent';
-import HomePhind from '../components/home/Phind';
-import HomeYoutube from '@/src/components/home/Youtube';
-import HomeString from '@/src/components/home/String';
+import HomeComponent from '../components/home';
+import Coins from '@/src/components/coins';
 
 export default async function Home() {
   return (
-    <div>
-      <PageContentHeader title="Your custom homepage" />
-      <PageContent>
-        <HomePhind />
-        <HomeYoutube />
-        <HomeString />
-      </PageContent>
+    <div className="page-height">
+      <div className="page-width">
+        <HomeComponent />
+      </div>
+      <div className="page-width-full">
+        <Coins view="minimal" />
+      </div>
     </div>
   );
 }

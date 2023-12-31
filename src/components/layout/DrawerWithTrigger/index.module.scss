@@ -30,7 +30,12 @@
   position: absolute;
   top: 0;
   left: 0;
-  padding: 1.125rem 1.4rem;
   font-size: 1.67rem;
+  display: flex;
+  // align-items: center;
+  // justify-content: center;
+}
+.triggerOutsideMore {
   transform: scaleY(0.933);
+  padding: 1rem 1.4rem;
 }

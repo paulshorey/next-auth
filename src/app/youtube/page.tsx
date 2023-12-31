@@ -100,7 +100,7 @@ export default async function PageYoutube({
           </div>
         }
         subtitle={
-          <div className="font-extralight tracking-wide pb-1">more focus, less CLICKBAIT</div>
+          <div className="font-extralight tracking-wide pb-1">more focus, less clickbait</div>
         }
       />
       <YouTubeResultsTemplate

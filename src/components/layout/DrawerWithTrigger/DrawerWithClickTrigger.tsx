@@ -5,7 +5,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/sharp-solid-svg-icons';
 import classes from './index.module.scss';
 import useOutsideClickOrEscape from '@/src/hooks/useOutsideClickOrEscape';
-import SideNav from '../SideNav';
+import NavSide from '../NavSide';
+import NavTop from '../NavTop';
 
 export default function DrawerWithTrigger() {
   const [open, setOpen] = useState(false);
@@ -15,19 +16,22 @@ export default function DrawerWithTrigger() {
 
   return (
     <div className={classes.container} ref={ref}>
-      <FontAwesomeIcon
-        icon={faBars}
-        className={classes.triggerOutside}
-        role="presentation"
-        onClick={() => setOpen(!open)}
-      />
+      <div className={classes.triggerOutside}>
+        <FontAwesomeIcon
+          icon={faBars}
+          className={classes.triggerOutsideMore}
+          role="presentation"
+          onClick={() => setOpen(!open)}
+        />
+        <NavTop />
+      </div>
       <div
         className={classes.content}
         data-open={open}
         role="presentation"
         onClick={() => setOpen(false)}
       >
-        <SideNav open={open} setOpen={setOpen} />
+        <NavSide open={open} setOpen={setOpen} />
       </div>
     </div>
   );

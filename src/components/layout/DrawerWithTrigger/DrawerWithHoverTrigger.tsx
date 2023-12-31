@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/sharp-regular-svg-icons';
 import classes from './index.module.scss';
 // import useOutsideClickOrEscape from '@/src/hooks/useOutsideClickOrEscape';
-import SideNav from '../SideNav';
+import SideNav from '../NavSide';
 
 export default function DrawerWithTrigger() {
   const [open, setOpen] = useState(false);

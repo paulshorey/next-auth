@@ -1,42 +1,14 @@
 'use client';
 
 import { Group } from '@mantine/core';
-// import { IconBellRinging, IconKey } from '@tabler/icons-react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmarkLarge } from '@fortawesome/pro-regular-svg-icons';
-import { faFile, faFileExclamation } from '@fortawesome/pro-light-svg-icons';
 import * as React from 'react';
 import { usePathname } from 'next/navigation';
 import classes from './index.module.scss';
 import { SessionContext } from '@/src/context/SessionProvider';
-// import AvatarIcon from '../../atoms/AvatarIcon';
-
-const nav = [
-  { link: '/', label: 'Home', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
-  { link: '/crypto', label: 'Crypto', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
-  { link: '/youtube', label: 'YouTube', Icon: <FontAwesomeIcon size="xl" icon={faFile} /> },
-  {
-    link: '/public-client',
-    label: 'Public "use client"',
-    Icon: <FontAwesomeIcon size="xl" icon={faFile} />,
-  },
-  {
-    link: '/public-server',
-    label: 'Public "use server"',
-    Icon: <FontAwesomeIcon size="xl" icon={faFile} />,
-  },
-  {
-    link: '/private-client',
-    label: 'Private "use client"',
-    Icon: <FontAwesomeIcon size="xl" icon={faFileExclamation} />,
-  },
-  {
-    link: '/private-server',
-    label: 'Private "use server"',
-    Icon: <FontAwesomeIcon size="xl" icon={faFileExclamation} />,
-  },
-];
+import { nav } from './const.nav';
 
 export default function SideNav({ open, setOpen }: any) {
   const pathname = usePathname();
