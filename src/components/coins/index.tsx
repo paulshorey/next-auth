@@ -19,11 +19,7 @@ export default function Coins({ debug, view = 'full' }: Props) {
   );
 
   if (isLoading) {
-    return (
-      <div className="text-center py-24">
-        <b>...loading new data...</b> ...takes 30 seconds...
-      </div>
-    );
+    return <div className="text-center py-24">...loading new data...</div>;
   }
   if (error) {
     return (

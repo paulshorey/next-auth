@@ -10,6 +10,10 @@ export default function HomePhind() {
   const [previousKey, setPreviousKey] = React.useState('');
   const [value, setValue] = React.useState('');
   const formRef = React.useRef<HTMLFormElement>(null);
+  const placeholder = `Ask anything. Be detailed and specific... 
+\`\`\`
+// include your code as markdown
+\`\`\``;
   return (
     <div className={`${classes.container}`}>
       <form
@@ -26,8 +30,8 @@ export default function HomePhind() {
         <Group className={classes.inputGroup}>
           <Textarea
             name="q"
-            className={classes.textarea}
-            placeholder="Ask anything. Be detailed and precise. Include code examples and reference links..."
+            className={`${classes.textarea}`}
+            placeholder={placeholder}
             onKeyDown={(e) => {
               if (
                 (previousKey === 'Shift' || previousKey === 'Meta') &&
@@ -63,7 +67,7 @@ export default function HomePhind() {
         <span> </span>
         {/* <h2 className={`${classes.title}`}>Phind.com</h2> */}
         <span className={classes.titleTip}>
-          <b>Shift</b> + <b>Cmd</b> + <b>Enter</b> to open in new tab
+          <b>Shift</b> + <b>Cmd</b> + <b>Enter</b> to submit
         </span>
       </div>
     </div>
