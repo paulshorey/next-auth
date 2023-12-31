@@ -12,7 +12,6 @@ export default function HomeYoutube() {
   const formRef = React.useRef<HTMLFormElement>(null);
   return (
     <div className={`${classes.container} pb-6 ml-0`}>
-      <h2 className={`${classes.title}`}>YouTube.com</h2>
       <form
         ref={formRef}
         method="GET"

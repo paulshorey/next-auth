@@ -38,10 +38,10 @@ export default function SearchInNewTab({}) {
           </Tabs.Tab>
           <Tabs.Tab
             value="strings"
-            leftSection={<FontAwesomeIcon icon={faSearch} />}
+            leftSection={<span className="mr-[-0.25rem]">Format</span>}
             className={classes.tab}
           >
-            Strings
+            strings
           </Tabs.Tab>
         </div>
       </Tabs.List>

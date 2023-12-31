@@ -11,6 +11,7 @@
 }
 
 .tabsList {
+  z-index: 1;
   white-space: nowrap;
   overflow: auto !important;
 }
@@ -55,9 +56,10 @@
 .inputGroup {
   border: solid 3px var(--mantine-primary-color-7);
   border-radius: 5px;
-  margin-top: -0.5rem;
+  margin-top: -0.33rem;
   width: 100%;
   position: relative;
+  z-index: 100;
   align-items: stretch;
   justify-content: stretch;
 }

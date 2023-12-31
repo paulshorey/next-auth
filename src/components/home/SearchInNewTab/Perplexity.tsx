@@ -12,12 +12,6 @@ export default function HomePhind() {
   const formRef = React.useRef<HTMLFormElement>(null);
   return (
     <div className={`${classes.container} pb-6`}>
-      <div className="flex flex-row justify-between">
-        <h2 className={`${classes.title}`}>Perplexity.com</h2>
-        <span className={classes.titleTip}>
-          press <b>Shift</b> + <b>Cmd</b> + <b>Enter</b> to submit
-        </span>
-      </div>
       <form
         ref={formRef}
         method="GET"
@@ -65,6 +59,13 @@ export default function HomePhind() {
           </div> */}
         </Group>
       </form>
+      <div className="flex flex-row justify-between">
+        <span> </span>
+        {/* <h2 className={`${classes.title}`}>Phind.com</h2> */}
+        <span className={classes.titleTip}>
+          <b>Shift</b> + <b>Cmd</b> + <b>Enter</b> to open in new tab
+        </span>
+      </div>
     </div>
   );
 }

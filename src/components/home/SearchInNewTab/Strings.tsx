@@ -38,7 +38,6 @@ export default function HomeYoutube() {
   };
   return (
     <div className={`${classes.container} mb-6`}>
-      <h2 className={`${classes.title}`}>string</h2>
       <Flex className={`${classes.inputGroup}`}>
         <TextInput
           name="input"
