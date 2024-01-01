@@ -20,7 +20,7 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
   let price = 0;
   return (
     <div className="grid grid-cols-7 w-full">
-      <h3 className="pt-2 m-0 lg:text-center">{coin}</h3>
+      <h3 className="pt-3 m-0 lg:text-center">{coin}</h3>
       {Object.entries(times)
         .reverse()
         .map(([time, [last, past]]: any) => {
@@ -65,28 +65,27 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
                   data-error={last.score === 0 ? true : null}
                 >
                   <span>
-                    <b>{Math.round(last.score)}</b>
-                    {/* <sup className="absolute w-full h-full top-0 left-0 text-center leading-[0.33rem]">
-                    {last.delta > 3.33 ? 'overbought' : last.delta < -3.33 ? 'oversold' : ''}
-                  </sup> */}
-                    {/* &thinsp; <sup>{last.delta.toFixed(1)}</sup> */}
+                    <b>{Math.round(last.score)}</b> &nbsp;
+                    {!!past.price && (
+                      <span className="text-xs">
+                        {Math.round(((last.price - past.price) / past.price) * 1000) / 10}%
+                      </span>
+                    )}
                   </span>
-                  <span>
+                  {!!past.price && (
                     <Vergence
                       rsipast={past?.score}
                       delta={last.delta}
                       rsiup={last.score - past.score}
                       avgup={last.score - last.delta - (past.score - past.delta)}
                     />
-                    {/* <Arrow one={past.score} two={last.score} /> */}
-                    {/* <Arrow one={past.score - past.delta} two={last.score - last.delta} /> */}
-                  </span>
+                  )}
                 </span>
               </span>
             </PopInfo>
           );
         })}
-      <div className="text-right lg:text-center">$&thinsp;{price}</div>
+      <div className="pt-3 m-0 text-right lg:text-center">$&thinsp;{price}</div>
     </div>
   );
 }

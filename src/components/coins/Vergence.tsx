@@ -22,9 +22,7 @@ export default function Vergence({
   rsipast: number;
 }) {
   const displayDelta = (
-    <span className="text-xs pr-[5px] mt-[-10px] inline-block align-[2px]">
-      {Math.round(delta)}
-    </span>
+    <span className="text-xs pl-[5px] inline-block align-[2px]">{Math.round(delta)}</span>
   );
   if (!rsipast) {
     return <>{displayDelta}</>;
@@ -34,20 +32,20 @@ export default function Vergence({
     if (rsiup < avgup) {
       // RSI going down faster than average
       return (
-        <>
-          {displayDelta}
+        <span className="px-2">
           <FontAwesomeIcon size="xs" icon={faDown} />
           <FontAwesomeIcon size="xs" icon={faArrowDownRight} />
-        </>
+          {displayDelta}
+        </span>
       );
     } else {
       // RSI and average converging down
       return (
-        <>
-          {displayDelta}
+        <span className="px-2">
           <FontAwesomeIcon size="xs" icon={faDownRight} />
           <FontAwesomeIcon size="xs" icon={faArrowDown} />
-        </>
+          {displayDelta}
+        </span>
       );
     }
   }
@@ -56,38 +54,38 @@ export default function Vergence({
     if (rsiup > avgup) {
       // RSI going up faster than average
       return (
-        <>
-          {displayDelta}
+        <span className="px-2">
           <FontAwesomeIcon size="xs" icon={faUp} />
           <FontAwesomeIcon size="xs" icon={faArrowUpRight} />
-        </>
+          {displayDelta}
+        </span>
       );
     } else {
       // RSI and average converging up
       return (
-        <>
-          {displayDelta}
+        <span className="px-2">
           <FontAwesomeIcon size="xs" icon={faUpRight} />
           <FontAwesomeIcon size="xs" icon={faArrowUp} />
-        </>
+          {displayDelta}
+        </span>
       );
     }
   }
   if (rsiup > 0 && avgup < 0) {
     return (
-      <>
-        {displayDelta}
+      <span className="px-2">
         <FontAwesomeIcon size="xs" icon={faUpRight} />
         <FontAwesomeIcon size="xs" icon={faArrowDownRight} />
-      </>
+        {displayDelta}
+      </span>
     );
   } else if (avgup > 0 && rsiup < 0) {
     return (
-      <>
-        {displayDelta}
+      <span className="px-2">
         <FontAwesomeIcon size="xs" icon={faDownRight} />
         <FontAwesomeIcon size="xs" icon={faArrowUpRight} />
-      </>
+        {displayDelta}
+      </span>
     );
   }
   return null;

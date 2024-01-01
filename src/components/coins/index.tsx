@@ -29,7 +29,7 @@ export default function Coins({ debug, view = 'full' }: Props) {
   }
 
   return (
-    <div className="flex flex-col lg:px-2 max-w-[1110px] mx-auto pt-12">
+    <div className="flex flex-col lg:px-2 max-w-[1120px] mx-auto pt-12">
       {view !== 'minimal' && (
         <div className="grid grid-cols-7 w-full mx-1 mb-6 text-center text-stone-500">
           <div />
