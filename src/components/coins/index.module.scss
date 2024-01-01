@@ -7,28 +7,53 @@
   width: 100%;
   border: solid 0.5rem transparent;
   text-align: center;
-  font-weight: 500;
+  font-weight: 300;
   b {
     font-weight: 500;
+    text-shadow: 0 0 50px black;
   }
-  color: rgba(255, 255, 255, 0.67);
+  background: rgba(122, 122, 122, 0.5);
+  color: rgba(211, 211, 211, 0.7);
   &[data-delta='1'] {
-    background: rgba(0, 128, 0, 0.25);
+    background: rgba(10, 90, 10, 0.75);
   }
-  &[data-delta='0'] {
-    background: rgba(128, 128, 128, 0.33);
+  &[data-delta='0.1'] {
+    background: rgba(55, 122, 55, 0.6);
   }
   &[data-delta='-1'] {
-    background: rgba(255, 0, 0, 0.125);
+    background: rgba(122, 33, 33, 0.7);
   }
-  &[data-rsi='1'] b {
-    color: rgba(50, 150, 50, 1);
+  &[data-delta='-0.1'] {
+    background: rgba(133, 77, 77, 0.67);
+  }
+  &[data-rsi='50'] b {
+    color: rgba(50, 144, 50, 1);
     font-weight: 700;
-    text-shadow: 0 0 5px #333;
+    text-shadow: 0 0 50px black;
   }
-  &[data-rsi='0'] b {
+  &[data-rsi='40'] b {
+    color: rgba(77, 177, 77, 1);
+    font-weight: 700;
+    text-shadow: 0 0 50px black;
   }
-  &[data-rsi='-1'] b {
-    color: rgba(200, 25, 25, 1);
+  &[data-rsi='30'] b {
+    color: rgba(55, 211, 55, 1);
+    font-weight: 700;
+    text-shadow: 0 0 50px black;
+  }
+  &[data-rsi='90'] b {
+    color: rgba(225, 50, 50, 0.7);
+    font-weight: 700;
+    text-shadow: 0 0 50px black;
+  }
+  &[data-rsi='80'] b {
+    color: rgba(200, 100, 100, 0.8);
+    font-weight: 700;
+    text-shadow: 0 0 50px black;
+  }
+  &[data-rsi='70'] b {
+    color: rgba(175, 125, 125, 0.9);
+    font-weight: 700;
+    text-shadow: 0 0 50px black;
   }
 }

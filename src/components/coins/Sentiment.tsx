@@ -28,20 +28,34 @@ export default function Sentiment({ ticker, times }: Props) {
             latestTimestamp = last.timestamp;
             price = last.price.toFixed(2);
           }
-          let delta = 0;
-          if (last.delta > 0.1) delta++;
-          if (last.delta < -0.1) delta--;
+          let delta = '0';
+          if (last.delta > 0.1) delta = '0.1';
+          if (last.delta > 1) delta = '1';
+          if (last.delta < -0.1) delta = '-0.1';
+          if (last.delta < -1) delta = '-1';
 
-          let rsi = 0;
-          if (last.score > 80) rsi--;
-          if (last.score < 40) rsi++;
+          let rsi = '0';
+          if (last.score > 70) {
+            rsi = '70';
+          }
+          if (last.score > 80) {
+            rsi = '80';
+          }
+          if (last.score > 90) {
+            rsi = '90';
+          }
+          if (last.score < 50) {
+            rsi = '50';
+          }
+          if (last.score < 40) {
+            rsi = '40';
+          }
+          if (last.score < 30) {
+            rsi = '30';
+          }
           return (
             <span key={time} className={classes.sentimentContainer}>
-              <span
-                className={classes.sentiment}
-                data-delta={delta.toString()}
-                data-rsi={rsi.toString()}
-              >
+              <span className={classes.sentiment} data-delta={delta} data-rsi={rsi}>
                 <b>{Math.round(Number(last.score))}</b> &thinsp;{' '}
                 <sup>{Number(last.delta).toFixed(1)}</sup>
               </span>

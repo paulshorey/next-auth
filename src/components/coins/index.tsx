@@ -47,7 +47,7 @@ export default function Coins({ debug, view = 'full' }: Props) {
           <Sentiment ticker={ticker} times={times} />
         </div>
       ))}
-      {view === 'full' && (
+      {false && view === 'full' && (
         <div>
           <div className=" mt-7 pt-6 border-t border-stone-700 text-center text-stone-500">
             This tool helps find reversals in buying/selling trends, to "time the market".
