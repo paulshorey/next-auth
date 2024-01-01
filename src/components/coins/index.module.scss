@@ -1,59 +1,55 @@
 .sentimentContainer {
   width: 100%;
+  background: rgba(122, 122, 122, 0.5);
 }
 .sentiment {
+  margin: 0;
   white-space: nowrap;
   display: block;
   width: 100%;
   border: solid 0.5rem transparent;
   text-align: center;
   font-weight: 300;
+  color: rgba(200, 200, 200, 0.75);
   b {
-    font-weight: 500;
+    font-weight: 700;
     text-shadow: 0 0 50px black;
+    color: rgba(199, 199, 199, 0.75);
   }
-  background: rgba(122, 122, 122, 0.5);
-  color: rgba(211, 211, 211, 0.7);
   &[data-delta='1'] {
-    background: rgba(10, 90, 10, 0.75);
+    background: rgba(0, 99, 0, 0.875);
   }
   &[data-delta='0.1'] {
-    background: rgba(55, 122, 55, 0.6);
+    background: rgba(11, 122, 11, 0.15);
   }
   &[data-delta='-1'] {
-    background: rgba(122, 33, 33, 0.7);
+    background: rgba(122, 33, 33, 0.875);
   }
   &[data-delta='-0.1'] {
-    background: rgba(133, 77, 77, 0.67);
+    background: rgba(122, 33, 33, 0.125);
   }
   &[data-rsi='50'] b {
-    color: rgba(50, 144, 50, 1);
-    font-weight: 700;
-    text-shadow: 0 0 50px black;
+    color: rgba(50, 205, 50, 1);
+    filter: saturate(0.2);
   }
   &[data-rsi='40'] b {
-    color: rgba(77, 177, 77, 1);
-    font-weight: 700;
-    text-shadow: 0 0 50px black;
+    color: rgba(50, 205, 50, 1);
+    filter: saturate(0.5);
   }
   &[data-rsi='30'] b {
-    color: rgba(55, 211, 55, 1);
-    font-weight: 700;
-    text-shadow: 0 0 50px black;
+    color: rgba(50, 205, 50, 1);
+    filter: saturate(0.8);
   }
   &[data-rsi='90'] b {
-    color: rgba(225, 50, 50, 0.7);
-    font-weight: 700;
-    text-shadow: 0 0 50px black;
+    color: rgba(255, 100, 100, 1);
+    filter: saturate(0.75);
   }
   &[data-rsi='80'] b {
-    color: rgba(200, 100, 100, 0.8);
-    font-weight: 700;
-    text-shadow: 0 0 50px black;
+    color: rgba(220, 100, 100, 1);
+    filter: saturate(0.5);
   }
   &[data-rsi='70'] b {
-    color: rgba(175, 125, 125, 0.9);
-    font-weight: 700;
-    text-shadow: 0 0 50px black;
+    // color: rgba(222, 123, 123, 1);
+    // filter: saturate(0.3);
   }
 }

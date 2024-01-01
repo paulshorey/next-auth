@@ -4,7 +4,7 @@ import * as React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy as faCopySolid } from '@fortawesome/sharp-solid-svg-icons';
 import { faAngleDown } from '@fortawesome/pro-light-svg-icons';
-import { Button, Flex, Select, TextInput } from '@mantine/core';
+import { Button, Flex, NativeSelect, Select, TextInput } from '@mantine/core';
 import { fromByteArray } from 'base64-js';
 import classes from './index.module.scss';
 
@@ -14,9 +14,14 @@ export default function HomeYoutube() {
   const [operation, setOperation] = React.useState('encode URL');
   const [previousKey, setPreviousKey] = React.useState('');
   const handleSubmit = () => {
-    if (!operation || !input) return;
+    if (!operation) {
+      setOutput(input || '');
+    }
     try {
       switch (operation) {
+        case 'timestamp':
+          setOutput(Date.now().toString());
+          break;
         case 'decode URL':
           setOutput(decodeURIComponent(input));
           break;
@@ -60,17 +65,18 @@ export default function HomeYoutube() {
         <Select
           className={classes.textarea}
           name="operation"
-          data={['encode URL', 'decode URL', 'decode base64']}
+          data={['encode URL', 'decode URL', 'decode base64', 'timestamp']}
           value={operation}
-          onChange={(value = '') => {
-            if (!value) return;
+          onBlur={handleSubmit}
+          onChange={function (val) {
+            const value = val || '';
             setOutput('');
             setOperation(value);
             setTimeout(() => {
               handleSubmit();
             }, 300);
           }}
-          leftSection={<FontAwesomeIcon icon={faAngleDown} className="pt-[2px] pl-[4px]" />}
+          rightSection={<FontAwesomeIcon icon={faAngleDown} className="pt-[2px] pl-[4px]" />}
         />
       </Flex>
       {!!output && <code className="block px-3 py-2 text-sm">{output}</code>}

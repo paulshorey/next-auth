@@ -22,5 +22,6 @@ module.exports = {
     'array-callback-return': 'off',
     'no-plusplus': 'off',
     'no-empty-pattern': 'off',
+    'func-names': 'off',
   },
 };

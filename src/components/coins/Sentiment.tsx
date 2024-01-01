@@ -18,7 +18,7 @@ export default function Sentiment({ ticker, times }: Props) {
   let price = 0;
   return (
     <div className="grid grid-cols-7 w-full">
-      <h3 className="pt-2 mb-6 lg:text-center">{coin}</h3>
+      <h3 className="pt-2 m-0 lg:text-center">{coin}</h3>
       {Object.entries(times)
         .reverse()
         .map(([time, [last, past]]: any, i) => {

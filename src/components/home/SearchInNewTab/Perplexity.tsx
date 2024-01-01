@@ -15,7 +15,7 @@ export default function HomePhind() {
       <form
         ref={formRef}
         method="GET"
-        action="https://perplexity.com"
+        action="https://www.perplexity.ai/search"
         target="_blank"
         onSubmit={(e) => {
           if (!value) {
@@ -24,6 +24,8 @@ export default function HomePhind() {
         }}
       >
         <Group className={classes.inputGroup}>
+          <input type="hidden" name="copilot" value="true" />
+          <input type="hidden" name="focus" value="internet" />
           <Textarea
             name="q"
             className={classes.textarea}
