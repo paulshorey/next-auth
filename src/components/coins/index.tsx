@@ -13,7 +13,7 @@ function fetcher(url: string) {
 
 export default function Coins({ debug, view = 'full' }: Props) {
   const { data, error, isLoading } = useSwr(
-    'https://crypto-sentiment.paulshorey.workers.dev/get?x=1',
+    `${process.env.NEXT_PUBLIC_CRYPTO_SENTIMENT_API_HOST}/get?nocache=1`,
     fetcher
   );
 
@@ -43,7 +43,7 @@ export default function Coins({ debug, view = 'full' }: Props) {
       )}
       {Object.entries(data).map(([ticker, times]: any) => (
         <div key={ticker} className={`${classes.coin}`}>
-          <Sentiment ticker={ticker} times={times} />
+          <Sentiment ticker={ticker} times={times} timestamp={Date.now()} />
         </div>
       ))}
       {false && view === 'full' && (

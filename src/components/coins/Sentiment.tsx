@@ -1,12 +1,12 @@
 import React from 'react';
-import Arrow from './Arrow';
 // import { alertType } from '@/src/app/crypto/page';
 import classes from './index.module.scss';
 import Vergence from './Vergence';
+import PopInfo from './PopInfo';
 
 type Props = any;
 
-export default function Sentiment({ ticker, times }: Props) {
+export default function Sentiment({ ticker, times, timestamp }: Props) {
   // let convert: any = {
   //   '5': '5min',
   //   '45': '45min',
@@ -31,7 +31,7 @@ export default function Sentiment({ ticker, times }: Props) {
             price = last.price > 1000 ? Math.round(last.price) : last.price.toFixed(2);
           }
           let delta = '0';
-          if (last.delta > 0.1) delta = '0.1';
+          if (last.delta > 0) delta = '0.1';
           if (last.delta > 1) delta = '1';
           if (last.delta < -0.1) delta = '-0.1';
           if (last.delta < -1) delta = '-1';
@@ -56,23 +56,24 @@ export default function Sentiment({ ticker, times }: Props) {
             rsi = '30';
           }
           return (
-            <span key={time} className={classes.sentimentContainer}>
-              <span
-                className={`${classes.sentiment} ${past?.score ? 'flex' : 'block'}`}
-                data-delta={delta}
-                data-rsi={rsi}
-                data-error={last.score === 0 ? true : null}
-              >
-                <span>
-                  <b>{Math.round(last.score)}</b>
-                  {/* <sup className="absolute w-full h-full top-0 left-0 text-center leading-[0.33rem]">
+            <PopInfo past={past} last={last} timestamp={timestamp} key={time}>
+              <span className={classes.sentimentContainer}>
+                <span
+                  className={`${classes.sentiment}`}
+                  data-delta={delta}
+                  data-rsi={rsi}
+                  data-error={last.score === 0 ? true : null}
+                >
+                  <span>
+                    <b>{Math.round(last.score)}</b>
+                    {/* <sup className="absolute w-full h-full top-0 left-0 text-center leading-[0.33rem]">
                     {last.delta > 3.33 ? 'overbought' : last.delta < -3.33 ? 'oversold' : ''}
                   </sup> */}
-                  {/* &thinsp; <sup>{last.delta.toFixed(1)}</sup> */}
-                </span>
-                {past?.score && (
+                    {/* &thinsp; <sup>{last.delta.toFixed(1)}</sup> */}
+                  </span>
                   <span>
                     <Vergence
+                      rsipast={past?.score}
                       delta={last.delta}
                       rsiup={last.score - past.score}
                       avgup={last.score - last.delta - (past.score - past.delta)}
@@ -80,9 +81,9 @@ export default function Sentiment({ ticker, times }: Props) {
                     {/* <Arrow one={past.score} two={last.score} /> */}
                     {/* <Arrow one={past.score - past.delta} two={last.score - last.delta} /> */}
                   </span>
-                )}
+                </span>
               </span>
-            </span>
+            </PopInfo>
           );
         })}
       <div className="text-right lg:text-center">$&thinsp;{price}</div>

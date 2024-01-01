@@ -14,14 +14,21 @@ export default function Vergence({
   rsiup,
   avgup,
   delta,
+  rsipast,
 }: {
   rsiup: number;
   avgup: number;
   delta: number;
+  rsipast: number;
 }) {
   const displayDelta = (
-    <span className="text-xs pr-[5px] mt-[-10px] inline-block align-[2px]">{delta.toFixed(1)}</span>
+    <span className="text-xs pr-[5px] mt-[-10px] inline-block align-[2px]">
+      {Math.round(delta)}
+    </span>
   );
+  if (!rsipast) {
+    return <>{displayDelta}</>;
+  }
   if (avgup < 0 && rsiup < 0) {
     // Going DOWN
     if (rsiup < avgup) {
