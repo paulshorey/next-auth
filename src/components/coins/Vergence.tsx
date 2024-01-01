@@ -55,15 +55,15 @@ export default function Vergence({ rsi, avg }: { rsi: number; avg: number }) {
   if (rsi > 0 && avg < 0) {
     return (
       <>
-        <FontAwesomeIcon size="" icon={faUpRight} />
-        <FontAwesomeIcon size="" icon={faArrowDownRight} />
+        <FontAwesomeIcon icon={faUpRight} />
+        <FontAwesomeIcon icon={faArrowDownRight} />
       </>
     );
   } else if (avg > 0 && rsi < 0) {
     return (
       <>
-        <FontAwesomeIcon size="" icon={faDownRight} />
-        <FontAwesomeIcon size="" icon={faArrowUpRight} />
+        <FontAwesomeIcon icon={faDownRight} />
+        <FontAwesomeIcon icon={faArrowUpRight} />
       </>
     );
   }
