@@ -64,7 +64,6 @@ export default function Sentiment({ ticker, times }: Props) {
                 data-error={last.score === 0 ? true : null}
               >
                 <span>
-                  {!past?.score && <>&ensp;</>}
                   <b>{Math.round(last.score)}</b>
                   {/* <sup className="absolute w-full h-full top-0 left-0 text-center leading-[0.33rem]">
                     {last.delta > 3.33 ? 'overbought' : last.delta < -3.33 ? 'oversold' : ''}
