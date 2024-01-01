@@ -30,8 +30,8 @@ export default function PopInfo({ children, past, last, timestamp }: any) {
                 avg: last.score - last.delta,
                 delta: last.delta,
                 price: last.price,
-                days: last.days,
-                mins: last.mins.toString(),
+                // days: last.days,
+                // mins: last.mins.toString(),
               },
               null,
               2
@@ -47,8 +47,8 @@ export default function PopInfo({ children, past, last, timestamp }: any) {
                 avg: past.score - past.delta,
                 delta: past.delta,
                 price: past.price,
-                days: past.days,
-                mins: past.mins.toString(),
+                // days: past.days,
+                // mins: past.mins.toString(),
               },
               null,
               2

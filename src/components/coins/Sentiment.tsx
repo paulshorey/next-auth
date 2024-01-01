@@ -23,7 +23,7 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
       <h3 className="pt-2 m-0 lg:text-center">{coin}</h3>
       {Object.entries(times)
         .reverse()
-        .map(([time, [last, past]]: any, i) => {
+        .map(([time, [last, past]]: any) => {
           if (time === '5') return null;
           if (!last) return null;
           if (last.timestamp > latestTimestamp) {
@@ -31,9 +31,9 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
             price = last.price > 1000 ? Math.round(last.price) : last.price.toFixed(2);
           }
           let delta = '0';
-          if (last.delta > 0) delta = '0.1';
+          if (last.delta > 0.5) delta = '0.1';
           if (last.delta > 1) delta = '1';
-          if (last.delta < -0.1) delta = '-0.1';
+          if (last.delta < -0.5) delta = '-0.1';
           if (last.delta < -1) delta = '-1';
 
           let rsi = '0';
