@@ -8,62 +8,78 @@ import {
   faUpRight,
   faDown,
   faUp,
-  faX,
 } from '@fortawesome/sharp-solid-svg-icons';
 
-export default function Vergence({ rsi, avg }: { rsi: number; avg: number }) {
-  if (avg < 0 && rsi < 0) {
+export default function Vergence({
+  rsiup,
+  avgup,
+  delta,
+}: {
+  rsiup: number;
+  avgup: number;
+  delta: number;
+}) {
+  const displayDelta = (
+    <span className="text-xs pr-[5px] mt-[-10px] inline-block align-[2px]">{delta.toFixed(1)}</span>
+  );
+  if (avgup < 0 && rsiup < 0) {
     // Going DOWN
-    if (rsi < avg) {
+    if (rsiup < avgup) {
       // RSI going down faster than average
       return (
         <>
-          <FontAwesomeIcon icon={faDown} />
-          <FontAwesomeIcon icon={faArrowDownRight} />
+          {displayDelta}
+          <FontAwesomeIcon size="xs" icon={faDown} />
+          <FontAwesomeIcon size="xs" icon={faArrowDownRight} />
         </>
       );
     } else {
       // RSI and average converging down
       return (
         <>
-          <FontAwesomeIcon icon={faDownRight} />
-          <FontAwesomeIcon icon={faArrowDown} />
+          {displayDelta}
+          <FontAwesomeIcon size="xs" icon={faDownRight} />
+          <FontAwesomeIcon size="xs" icon={faArrowDown} />
         </>
       );
     }
   }
-  if (avg > 0 && rsi > 0) {
+  if (avgup > 0 && rsiup > 0) {
     // Going UP
-    if (rsi > avg) {
+    if (rsiup > avgup) {
       // RSI going up faster than average
       return (
         <>
-          <FontAwesomeIcon icon={faUp} />
-          <FontAwesomeIcon icon={faArrowUpRight} />
+          {displayDelta}
+          <FontAwesomeIcon size="xs" icon={faUp} />
+          <FontAwesomeIcon size="xs" icon={faArrowUpRight} />
         </>
       );
     } else {
       // RSI and average converging up
       return (
         <>
-          <FontAwesomeIcon icon={faUpRight} />
-          <FontAwesomeIcon icon={faArrowUp} />
+          {displayDelta}
+          <FontAwesomeIcon size="xs" icon={faUpRight} />
+          <FontAwesomeIcon size="xs" icon={faArrowUp} />
         </>
       );
     }
   }
-  if (rsi > 0 && avg < 0) {
+  if (rsiup > 0 && avgup < 0) {
     return (
       <>
-        <FontAwesomeIcon icon={faUpRight} />
-        <FontAwesomeIcon icon={faArrowDownRight} />
+        {displayDelta}
+        <FontAwesomeIcon size="xs" icon={faUpRight} />
+        <FontAwesomeIcon size="xs" icon={faArrowDownRight} />
       </>
     );
-  } else if (avg > 0 && rsi < 0) {
+  } else if (avgup > 0 && rsiup < 0) {
     return (
       <>
-        <FontAwesomeIcon icon={faDownRight} />
-        <FontAwesomeIcon icon={faArrowUpRight} />
+        {displayDelta}
+        <FontAwesomeIcon size="xs" icon={faDownRight} />
+        <FontAwesomeIcon size="xs" icon={faArrowUpRight} />
       </>
     );
   }

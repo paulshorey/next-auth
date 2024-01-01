@@ -64,17 +64,23 @@ export default function Sentiment({ ticker, times }: Props) {
                 data-error={last.score === 0 ? true : null}
               >
                 <span>
-                  &ensp;<b>{Math.round(last.score)}</b> &thinsp; <sup>{last.delta.toFixed(1)}</sup>
+                  {!past?.score && <>&ensp;</>}
+                  <b>{Math.round(last.score)}</b>
+                  {/* <sup className="absolute w-full h-full top-0 left-0 text-center leading-[0.33rem]">
+                    {last.delta > 3.33 ? 'overbought' : last.delta < -3.33 ? 'oversold' : ''}
+                  </sup> */}
+                  {/* &thinsp; <sup>{last.delta.toFixed(1)}</sup> */}
                 </span>
                 {past?.score && (
-                  <sup>
+                  <span>
                     <Vergence
-                      rsi={last.score - past.score}
-                      avg={last.score - last.delta - (past.score - past.delta)}
+                      delta={last.delta}
+                      rsiup={last.score - past.score}
+                      avgup={last.score - last.delta - (past.score - past.delta)}
                     />
                     {/* <Arrow one={past.score} two={last.score} /> */}
                     {/* <Arrow one={past.score - past.delta} two={last.score - last.delta} /> */}
-                  </sup>
+                  </span>
                 )}
               </span>
             </span>

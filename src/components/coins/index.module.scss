@@ -1,11 +1,15 @@
 .sentimentContainer {
   width: 100%;
   background: rgba(122, 122, 122, 0.5);
+  margin-bottom: 1px;
 }
 .sentiment {
+  position: relative;
   margin: 0;
+  padding: 0;
+  line-height: 2rem;
   white-space: nowrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   border: solid 0.5rem transparent;
