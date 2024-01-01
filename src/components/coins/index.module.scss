@@ -7,14 +7,28 @@
   width: 100%;
   border: solid 0.5rem transparent;
   text-align: center;
-  color: rgba(255, 255, 255, 0.5);
-  &[data-score='1'] {
+  font-weight: 500;
+  b {
+    font-weight: 500;
+  }
+  color: rgba(255, 255, 255, 0.67);
+  &[data-delta='1'] {
     background: rgba(0, 128, 0, 0.25);
   }
-  &[data-score='0'] {
+  &[data-delta='0'] {
     background: rgba(128, 128, 128, 0.33);
   }
-  &[data-score='-1'] {
+  &[data-delta='-1'] {
     background: rgba(255, 0, 0, 0.125);
+  }
+  &[data-rsi='1'] b {
+    color: rgba(50, 150, 50, 1);
+    font-weight: 700;
+    text-shadow: 0 0 5px #333;
+  }
+  &[data-rsi='0'] b {
+  }
+  &[data-rsi='-1'] b {
+    color: rgba(200, 25, 25, 1);
   }
 }
