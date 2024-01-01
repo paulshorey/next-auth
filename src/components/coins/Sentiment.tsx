@@ -28,7 +28,7 @@ export default function Sentiment({ ticker, times }: Props) {
           if (!last) return null;
           if (last.timestamp > latestTimestamp) {
             latestTimestamp = last.timestamp;
-            price = last.price > 10000 ? last.price : last.price.toFixed(2);
+            price = last.price > 1000 ? last.price : last.price.toFixed(2);
           }
           let delta = '0';
           if (last.delta > 0.1) delta = '0.1';
