@@ -29,8 +29,8 @@ export default function Sentiment({ ticker, times }: Props) {
             price = last.price.toFixed(2);
           }
           let score = 0;
-          if (last.delta > 1) score++;
-          if (last.delta < -1) score--;
+          if (last.delta > 0.1) score++;
+          if (last.delta < -0.1) score--;
           if (last.score > 80) score--;
           if (last.score < 40) score++;
           if (score > 1) score = 1;
