@@ -1,6 +1,8 @@
 import React from 'react';
+import Arrow from './Arrow';
 // import { alertType } from '@/src/app/crypto/page';
 import classes from './index.module.scss';
+import Vergence from './Vergence';
 
 type Props = any;
 
@@ -55,9 +57,25 @@ export default function Sentiment({ ticker, times }: Props) {
           }
           return (
             <span key={time} className={classes.sentimentContainer}>
-              <span className={classes.sentiment} data-delta={delta} data-rsi={rsi}>
-                <b>{Math.round(Number(last.score))}</b> &thinsp;{' '}
-                <sup>{Number(last.delta).toFixed(1)}</sup>
+              <span
+                className={`${classes.sentiment} ${past?.score ? 'flex' : 'block'}`}
+                data-delta={delta}
+                data-rsi={rsi}
+                data-error={last.score === 0 ? true : null}
+              >
+                <span>
+                  &ensp;<b>{Math.round(last.score)}</b> &thinsp; <sup>{last.delta.toFixed(1)}</sup>
+                </span>
+                {past?.score && (
+                  <sup>
+                    <Vergence
+                      rsi={last.score - past.score}
+                      avg={last.score - last.delta - (past.score - past.delta)}
+                    />
+                    {/* <Arrow one={past.score} two={last.score} /> */}
+                    {/* <Arrow one={past.score - past.delta} two={last.score - last.delta} /> */}
+                  </sup>
+                )}
               </span>
             </span>
           );

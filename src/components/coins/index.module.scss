@@ -5,10 +5,11 @@
 .sentiment {
   margin: 0;
   white-space: nowrap;
-  display: block;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   border: solid 0.5rem transparent;
-  text-align: center;
+  text-align: left;
   font-weight: 300;
   color: rgba(200, 200, 200, 0.75);
   b {

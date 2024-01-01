@@ -23,5 +23,6 @@ module.exports = {
     'no-plusplus': 'off',
     'no-empty-pattern': 'off',
     'func-names': 'off',
+    'no-else-return': 'off',
   },
 };
