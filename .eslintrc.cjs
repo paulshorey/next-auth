@@ -24,5 +24,6 @@ module.exports = {
     'no-empty-pattern': 'off',
     'func-names': 'off',
     'no-else-return': 'off',
+    'prefer-destructuring': 'off',
   },
 };

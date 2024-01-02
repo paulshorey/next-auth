@@ -6,7 +6,7 @@ import { faBars } from '@fortawesome/sharp-solid-svg-icons';
 import classes from './index.module.scss';
 import useOutsideClickOrEscape from '@/src/hooks/useOutsideClickOrEscape';
 import NavSide from '../NavSide';
-import NavTop from '../NavTop';
+// import NavTop from '../NavTop';
 
 export default function DrawerWithTrigger() {
   const [open, setOpen] = useState(false);
@@ -23,7 +23,7 @@ export default function DrawerWithTrigger() {
           role="presentation"
           onClick={() => setOpen(!open)}
         />
-        <NavTop />
+        {/* <NavTop /> */}
       </div>
       <div
         className={classes.content}

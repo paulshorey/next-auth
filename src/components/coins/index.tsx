@@ -13,7 +13,7 @@ function fetcher(url: string) {
 
 export default function Coins({ debug, view = 'full' }: Props) {
   const { data, error, isLoading } = useSwr(
-    `${process.env.NEXT_PUBLIC_CRYPTO_SENTIMENT_API_HOST}/get?nocache=1`,
+    `${process.env.NEXT_PUBLIC_CRYPTO_SENTIMENT_API_HOST}/get`,
     fetcher
   );
 
@@ -29,7 +29,7 @@ export default function Coins({ debug, view = 'full' }: Props) {
   }
 
   return (
-    <div className="flex flex-col lg:px-2 max-w-[1120px] mx-auto pt-12">
+    <div className="flex flex-col lg:px-2 max-w-[1420px] mx-auto mt-2">
       {view !== 'minimal' && (
         <div className="grid grid-cols-7 w-full mx-1 mb-6 text-center text-stone-500">
           <div />
