@@ -20,7 +20,7 @@ export default function Coins({ debug, view = 'full' }: Props) {
   React.useEffect(() => {
     interval = setInterval(() => {
       mutate();
-    }, 45000);
+    }, 60000);
     return () => {
       clearInterval(interval);
     };
@@ -61,10 +61,12 @@ export default function Coins({ debug, view = 'full' }: Props) {
             <li>Fat arrow = RSI line direction in chart in time period</li>
             <li>Skinny arrow = RSI SMA Average direction in time period</li>
             <li>
-              +/- number in the middle = RSI/SMA divergence in time period (positive = lines
-              diverging, negative = lines converging)
+              +/- small number in the middle = <b>%</b> RSI/SMA divergence in time period (positive
+              = lines diverging, negative = lines converging)
             </li>
-            <li>% +/- number on the right = $USD price change in time period</li>
+            <li>
+              +/- small number on the right = <b>%</b> $USD price change in time period
+            </li>
             <li>Green background = RSI above SMA (bullish momentum)</li>
             <li>Red background = RSI below SMA (bearish momentum)</li>
             <li>DX! = US Dollar Futures, SP! = S&P500 Futures</li>

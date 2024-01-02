@@ -91,8 +91,15 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
           // const rsiup = last.score - past.score;
           // const avgup = last.score - last.delta - (past.score - past.delta);
 
-          const deltaRsi = last.score - past.score;
-          const deltaAvg = last.score - last.delta - (past.score - past.delta);
+          let mArrows = 1;
+          if (time === '45') mArrows = 90 / 45;
+          if (time === '240') mArrows = 240 / 240;
+          if (time === 'D') mArrows = 720 / 1440;
+          if (time === 'W') mArrows = 9000 / 10080;
+          if (time === 'M') mArrows = 36000 / 43200;
+
+          const deltaRsi = mArrows * (last.score - past.score);
+          const deltaAvg = mArrows * (last.score - last.delta - (past.score - past.delta));
           const deltaDelta = last.delta - past.delta;
           const deltaPrice = Math.round(((last.price - past.price) / past.price) * 1000) / 10;
 
@@ -100,7 +107,7 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
             <PopInfo past={past} last={last} timestamp={timestamp} key={time}>
               <div className={classes.sentimentContainer}>
                 <div
-                  className={`${classes.sentiment} flex justify-between items-center flex-col xl:flex-row`}
+                  className={`${classes.sentiment} flex justify-center items-center flex-col xl:flex-row`}
                   data-delta={l}
                   data-rsi={rsi}
                   data-x={x}
@@ -109,19 +116,18 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
                   data-error={last.score === 0 ? true : null}
                 >
                   <div className="flex flex-col lg:flex-row text-center">
-                    <b className="lg:pl-3 xl:pl-4 2xl:pl-5">{Math.round(last.score)}</b>
+                    <b className="text-center w-11">{Math.round(last.score)}</b>
                     {!!past.price && <Vergence deltaRsi={deltaRsi} deltaAvg={deltaAvg} />}
-                    {!!past.price && (
-                      <span className="text-xs lg:text-sm opacity-50 font-semibold">
-                        {deltaDelta > 0 ? '+' : '-'}
-                        {Math.abs(Math.round(deltaDelta * 10) / 10).toFixed(1)}
-                      </span>
-                    )}
+                    <span className="text-xs lg:text-sm opacity-50 font-semibold text-center w-8">
+                      {deltaDelta > 0 ? '+' : '-'}
+                      {Math.abs(Math.round(deltaDelta))}
+                    </span>
                   </div>
 
-                  {!!past.price && (
-                    <span className="lg:pr-3 xl:pr-4 text-xs lg:text-sm opacity-50 font-semibold text-right">
-                      {deltaPrice > 0 ? '+' : '-'} {Math.abs(deltaPrice)}%
+                  {!!past.price && time !== '45' && (
+                    <span className="text-xs lg:text-sm opacity-70 font-bold text-center w-7">
+                      {deltaPrice > 0 ? '+' : '-'}
+                      {Math.abs(Math.round(deltaPrice))}
                     </span>
                   )}
                 </div>

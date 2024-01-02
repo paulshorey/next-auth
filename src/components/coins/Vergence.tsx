@@ -6,7 +6,7 @@ export default function Vergence({ deltaAvg, deltaRsi }: { deltaAvg: any; deltaR
   const avgDegree = Math.min(Math.max(deltaAvg, -15), 15) * -6;
 
   return (
-    <span className="lg:pl-1 xl:pl-2 lg:pr-1 xl:pr-2">
+    <span className="">
       {/* {Math.round(deltaRsi)} */}
       <FontAwesomeIcon
         size="xs"
