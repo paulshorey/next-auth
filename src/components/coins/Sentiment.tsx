@@ -24,7 +24,6 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
       {Object.entries(times)
         .reverse()
         .map(([time, [last, past]]: any) => {
-          console.log('last', last);
           if (time === '5') return null;
           if (!last) return null;
           if (last.timestamp > latestTimestamp) {
