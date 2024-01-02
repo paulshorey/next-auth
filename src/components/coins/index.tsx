@@ -10,12 +10,21 @@ type Props = any;
 function fetcher(url: string) {
   return fetch(url).then((r) => r.json());
 }
-
+let interval: any;
 export default function Coins({ debug, view = 'full' }: Props) {
-  const { data, error, isLoading } = useSwr(
+  const { data, error, mutate, isLoading } = useSwr(
     `${process.env.NEXT_PUBLIC_CRYPTO_SENTIMENT_API_HOST}/get`,
     fetcher
   );
+
+  React.useEffect(() => {
+    interval = setInterval(() => {
+      mutate();
+    }, 45000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   if (isLoading) {
     return <div className="text-center py-24">...loading new data...</div>;
