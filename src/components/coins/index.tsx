@@ -55,30 +55,20 @@ export default function Coins({ debug, view = 'full' }: Props) {
           <Sentiment ticker={ticker} times={times} timestamp={Date.now()} />
         </div>
       ))}
-      {false && view === 'full' && (
-        <div>
-          <div className=" mt-7 pt-6 border-t border-stone-700 text-center text-stone-500">
-            This tool helps find reversals in buying/selling trends, to "time the market".
-            <br />
-            Buy/sell when all 5 cells in the row have turned green/red!
-            <br />
-            Preferably after a reversal, after they were recently all the same but opposite color.
-            <br />
-            This timing is impossible for humans to do reliably. Alerts and bot coming soon!
-            <br />
-            RSI &gt; 80 ⇒ -1 &emsp; RSI&lt;Avg ⇒ -1 &emsp; RSI&gt;Avg ⇒ +1 &emsp; RSI &lt; 40 ⇒ +1
-          </div>
-          <div className="grid grid-cols-3 w-full mt-5">
-            <div className={`${classes.sentiment}`} data-score="-1">
-              - bearish
-            </div>
-            <div className={`${classes.sentiment}`} data-score="0">
-              0 hodl
-            </div>
-            <div className={`${classes.sentiment}`} data-score="1">
-              + bullish
-            </div>
-          </div>
+      {view === 'full' && (
+        <div className="pb-12">
+          <ul className=" mt-8 pt-6 border-t border-stone-700 text-center text-stone-500">
+            <li>Fat arrow = RSI line direction in chart in time period</li>
+            <li>Skinny arrow = RSI SMA Average direction in time period</li>
+            <li>
+              +/- number in the middle = RSI/SMA divergence in time period (positive = lines
+              diverging, negative = lines converging)
+            </li>
+            <li>% +/- number on the right = $USD price change in time period</li>
+            <li>Green background = RSI above SMA (bullish momentum)</li>
+            <li>Red background = RSI below SMA (bearish momentum)</li>
+            <li>DX! = US Dollar Futures, SP! = S&P500 Futures</li>
+          </ul>
         </div>
       )}
     </div>

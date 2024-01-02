@@ -19,11 +19,12 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
   let latestTimestamp = 0;
   let price = 0;
   return (
-    <div className="grid grid-cols-7 w-full">
-      <h3 className="pt-3 m-0 lg:text-center">{coin}</h3>
+    <div className={`grid grid-cols-7 w-full ${ticker === 'DX!' && 'mt-12'}`}>
+      <h3 className="pt-3 m-0 text-center text-xs lg:text-sm">{coin}</h3>
       {Object.entries(times)
         .reverse()
         .map(([time, [last, past]]: any) => {
+          console.log('last', last);
           if (time === '5') return null;
           if (!last) return null;
           if (last.timestamp > latestTimestamp) {
@@ -32,8 +33,8 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
               last.price > 9999
                 ? Math.round(last.price)
                 : last.price >= 100
-                  ? Math.round(last.price)
-                  : Math.round(last.price * 10) / 10;
+                  ? Math.round(last.price * 10) / 10
+                  : Math.round(last.price * 100) / 100;
           }
 
           let rsi = '0';
@@ -91,11 +92,16 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
           // const rsiup = last.score - past.score;
           // const avgup = last.score - last.delta - (past.score - past.delta);
 
+          const deltaRsi = last.score - past.score;
+          const deltaAvg = last.score - last.delta - (past.score - past.delta);
+          const deltaDelta = last.delta - past.delta;
+          const deltaPrice = Math.round(((last.price - past.price) / past.price) * 1000) / 10;
+
           return (
             <PopInfo past={past} last={last} timestamp={timestamp} key={time}>
               <div className={classes.sentimentContainer}>
                 <div
-                  className={`${classes.sentiment} flex justify-between items-center`}
+                  className={`${classes.sentiment} flex justify-between items-center flex-col xl:flex-row`}
                   data-delta={l}
                   data-rsi={rsi}
                   data-x={x}
@@ -103,38 +109,28 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
                   data-d={d}
                   data-error={last.score === 0 ? true : null}
                 >
-                  <div className="w-full">
-                    <div className="flex justify-between items-center  w-full">
-                      <b className="pr-2">{Math.round(last.score)}</b>
-                      <span className="text-sm">
-                        {last.delta > 0 ? '' : <>&ndash; </>}
-                        {Math.abs(Math.round(last.delta * 10) / 10).toFixed(1)}
+                  <div className="flex flex-col lg:flex-row text-center">
+                    <b className="lg:pl-3 xl:pl-4 2xl:pl-5">{Math.round(last.score)}</b>
+                    {!!past.price && <Vergence deltaRsi={deltaRsi} deltaAvg={deltaAvg} />}
+                    {!!past.price && (
+                      <span className="text-xs lg:text-sm opacity-50 font-semibold">
+                        {deltaDelta > 0 ? '+' : '-'}
+                        {Math.abs(Math.round(deltaDelta * 10) / 10).toFixed(1)}
                       </span>
-                      {/* {!!past.price && (
-                        <span className="text-xs">
-                          {Math.round(((last.price - past.price) / past.price) * 1000) / 10}%
-                        </span>
-                      )} */}
-                      {/* </div>
-                    <div className="text-xs flex flex-row justify-between items-center w-full">
-                      <span>
-                        {(
-                          Math.round((last.score - last.delta - (past.score - past.delta)) * 10) /
-                          10
-                        ).toFixed(1)}
-                        &emsp;
-                      </span>
-                      <span>{(Math.round((last.score - past.score) * 10) / 10).toFixed(1)}</span>
-                     */}
-                    </div>
+                    )}
                   </div>
-                  <Vergence last={last} past={past} />
+
+                  {!!past.price && (
+                    <span className="lg:pr-3 xl:pr-4 text-xs lg:text-sm opacity-50 font-semibold text-right">
+                      {deltaPrice > 0 ? '+' : '-'} {Math.abs(deltaPrice)}%
+                    </span>
+                  )}
                 </div>
               </div>
             </PopInfo>
           );
         })}
-      <div className="pt-3 m-0 text-right lg:text-center">$&thinsp;{price}</div>
+      <div className="pt-3 m-0 text-center text-xs lg:text-sm">$&thinsp;{price}</div>
     </div>
   );
 }
