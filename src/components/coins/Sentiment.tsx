@@ -98,10 +98,14 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
           if (time === 'W') mArrows = 9000 / 10080;
           if (time === 'M') mArrows = 36000 / 43200;
 
+          let mPrice = 1;
+          if (time === '45') mPrice = 180 / 45;
+
           const deltaRsi = mArrows * (last.score - past.score);
           const deltaAvg = mArrows * (last.score - last.delta - (past.score - past.delta));
           const deltaDelta = last.delta - past.delta;
-          const deltaPrice = Math.round(((last.price - past.price) / past.price) * 1000) / 10;
+          const deltaPrice =
+            Math.round(mPrice * ((last.price - past.price) / past.price) * 1000) / 10;
 
           return (
             <PopInfo past={past} last={last} timestamp={timestamp} key={time}>
@@ -124,7 +128,7 @@ export default function Sentiment({ ticker, times, timestamp }: Props) {
                     </span>
                   </div>
 
-                  {!!past.price && time !== '45' && (
+                  {!!past.price && (
                     <span className="text-xs lg:text-sm opacity-70 font-bold text-center w-7">
                       {deltaPrice > 0 ? '+' : '-'}
                       {Math.abs(Math.round(deltaPrice))}
