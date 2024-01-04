@@ -22,7 +22,7 @@ export default function SideNav({ open, setOpen }: any) {
       href={item.link}
       key={item.label + i}
     >
-      {item.Icon}&ensp;&thinsp;
+      {/* {item.Icon}&ensp;&thinsp; */}
       <span className="pt-[2px]">{item.label}</span>
     </Link>
   ));
