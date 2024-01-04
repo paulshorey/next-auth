@@ -28,6 +28,7 @@ export default async function RootLayout({ children }: { children: any }) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
+        <script src="/audio/greenRingtone.js" type="text/javascript" defer />
       </head>
       <body>
         <SessionProvider session={session}>

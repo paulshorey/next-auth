@@ -18,6 +18,10 @@ export default function Coins({ debug, view = 'full' }: Props) {
   );
 
   React.useEffect(() => {
+    setTimeout(() => {
+      // @ts-ignore
+      window.sound.play();
+    }, 3000);
     interval = setInterval(() => {
       mutate();
     }, 60000);

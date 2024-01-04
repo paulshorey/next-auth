@@ -61,31 +61,31 @@ export default function Label({
   }
 
   if (momentumx.M < -1) {
-    score -= 5;
-    whySell.push('M momentum -5');
+    score -= 10;
+    whySell.push('M momentum -10');
   }
   if (momentumx.W < -1) {
     if (divergingx.W < 0) {
-      score -= 4;
-      whySell.push('W momentum diverging -4');
+      score -= 8;
+      whySell.push('W momentum diverging -8');
     } else {
-      score -= 3;
-      whySell.push('W momentum -3');
+      score -= 7;
+      whySell.push('W momentum -7');
     }
   }
   if (momentumx.D < -1) {
     if (divergingx.D < 0) {
-      score -= 3;
-      whySell.push('D momentum diverging -3');
+      score -= 4;
+      whySell.push('D momentum diverging -4');
     } else {
-      score -= 2;
-      whySell.push('D momentum -2');
+      score -= 3;
+      whySell.push('D momentum -3');
     }
   }
   if (momentumx['240'] < -1) {
     if (divergingx['240'] < 0) {
-      score -= 1;
-      whySell.push('240 momentum diverging -1');
+      score -= 2;
+      whySell.push('240 momentum diverging -2');
     }
   }
 
