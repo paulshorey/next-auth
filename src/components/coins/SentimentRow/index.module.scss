@@ -1,0 +1,65 @@
+.sentimentContainer {
+  width: 100%;
+  background: rgba(122, 126, 128, 0.5125);
+  margin-top: 1.11rem;
+}
+.sentiment {
+  position: relative;
+  margin: 0;
+  height: 100%;
+  padding: 0.67rem 1.33rem 0.67rem;
+  line-height: 1.25rem;
+  white-space: nowrap;
+  border-left: none;
+  border-right: none;
+  font-weight: 300;
+  width: 100%;
+  color: rgba(233, 233, 233, 1);
+  text-shadow: 0 0 5px #666;
+  * {
+    position: relative;
+    z-index: 10;
+  }
+  &[data-delta='1'] {
+    background: rgba(0, 88, 0, 0.875);
+  }
+  &[data-delta='0.1'] {
+    background: rgba(11, 122, 11, 0.15);
+  }
+  &[data-delta='-1'] {
+    background: rgba(122, 33, 33, 0.875);
+  }
+  &[data-delta='-0.1'] {
+    background: rgba(122, 33, 33, 0.125);
+  }
+
+  .rsi {
+    font-weight: 700;
+    text-shadow: 0 0 50px black;
+    color: rgba(233, 233, 233, 0.67);
+  }
+  &[data-rsi='50'] .rsi {
+    color: rgba(50, 205, 50, 1);
+    filter: saturate(0.2) brightness(1.125);
+  }
+  &[data-rsi='40'] .rsi {
+    color: rgba(50, 205, 50, 1);
+    filter: saturate(0.5) brightness(1.125);
+  }
+  &[data-rsi='30'] .rsi {
+    color: rgba(50, 205, 50, 1);
+    filter: saturate(0.8) brightness(1.125);
+  }
+  &[data-rsi='90'] .rsi {
+    color: rgba(255, 100, 100, 1);
+    filter: saturate(0.75) brightness(1.125);
+  }
+  &[data-rsi='80'] .rsi {
+    color: rgba(220, 100, 100, 1);
+    filter: saturate(0.5) brightness(1.125);
+  }
+  &[data-rsi='70'] .rsi {
+    color: rgba(255, 123, 123, 1);
+    filter: saturate(0.1) brightness(1.125);
+  }
+}

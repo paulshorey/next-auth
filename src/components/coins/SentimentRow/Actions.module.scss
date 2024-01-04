@@ -1,0 +1,26 @@
+.label {
+  opacity: 0.9;
+  padding-top: 3px;
+  [data-action='buy'] {
+    color: rgb(24, 194, 24);
+    // filter: saturate(0.8);
+  }
+  [data-action='sell'] {
+    color: rgba(225, 95, 100, 1);
+    // filter: saturate(0.75);
+  }
+  [data-action='hodl'] {
+    color: rgba(133, 133, 133, 1);
+  }
+}
+.title {
+  font-weight: 700;
+}
+.reason {
+  font-weight: 400;
+  filter: saturate(0.75);
+  opacity: 0.8;
+}
+.reasons {
+  padding-left: 0.75rem;
+}

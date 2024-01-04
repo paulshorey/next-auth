@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PageContentHeader from '@/src/components/layout/PageContentHeader';
-import decodeHtml from '@/src/functions/decodeHtml';
+import decodeHtml from '@/src/functions/string/decodeHtml';
 import YouTubeResultsTemplate from '@/src/components/youtube/index';
 
 export type youtubeType = {

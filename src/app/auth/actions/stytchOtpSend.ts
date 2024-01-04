@@ -1,7 +1,7 @@
 'use server';
 
 import { Client } from 'stytch';
-import phoneOrEmail from '@/src/functions/phoneOrEmail';
+import phoneOrEmail from '@/src/functions/string/phoneOrEmail';
 
 const stytchClient = new Client({
   project_id: process.env.STYTCH_PROJECTID || '',

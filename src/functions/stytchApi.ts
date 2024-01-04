@@ -1,5 +1,5 @@
 export default async function stytchApi(url: string, post: any) {
-  console.log('fetch', 'https://test.stytch.com/v1' + url, {
+  console.log('fetch', `https://test.stytch.com/v1${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -9,7 +9,7 @@ export default async function stytchApi(url: string, post: any) {
     },
     body: JSON.stringify(post),
   });
-  const res = await fetch('https://test.stytch.com/v1' + url, {
+  const res = await fetch(`https://test.stytch.com/v1${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -19,5 +19,5 @@ export default async function stytchApi(url: string, post: any) {
     },
     body: JSON.stringify(post),
   });
-  return await res.json();
+  return res.json();
 }

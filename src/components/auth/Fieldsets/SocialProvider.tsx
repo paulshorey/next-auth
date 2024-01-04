@@ -9,7 +9,7 @@ import { useDisclosure } from '@mantine/hooks';
 import styles from './index.module.scss';
 import stytchPasswordAuthenticate from '@/src/app/auth/actions/stytchPasswordAuthenticate';
 import makeToast from '@/src/functions/makeToast';
-import phoneOrEmail from '@/src/functions/phoneOrEmail';
+import phoneOrEmail from '@/src/functions/string/phoneOrEmail';
 
 export default function SocialProvider({ csrfToken }: any = {}) {
   const [infoOpened, { toggle: toggleInfoOpened }] = useDisclosure(false);

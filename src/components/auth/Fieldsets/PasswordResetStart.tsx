@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { Button, Fieldset, TextInput } from '@mantine/core';
 import styles from './index.module.scss';
-import phoneOrEmail from '@/src/functions/phoneOrEmail';
+import phoneOrEmail from '@/src/functions/string/phoneOrEmail';
 // import stytchApi from '@/src/functions/stytchApi';
 import stytchPasswordResetStart from '@/src/app/auth/actions/stytchPasswordResetStart';
 import FieldErrorMessage from '@/src/components/atoms/FieldErrorMessage';

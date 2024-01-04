@@ -3,7 +3,7 @@
 import React from 'react';
 import useSwr from 'swr';
 import classes from './index.module.scss';
-import Sentiment from './Sentiment';
+import Sentiment from './SentimentRow';
 
 type Props = any;
 
@@ -13,7 +13,7 @@ function fetcher(url: string) {
 let interval: any;
 export default function Coins({ debug, view = 'full' }: Props) {
   const { data, error, mutate, isLoading } = useSwr(
-    `${process.env.NEXT_PUBLIC_CRYPTO_SENTIMENT_API_HOST}/get`,
+    `${process.env.NEXT_PUBLIC_CRYPTO_SENTIMENT_API_HOST}/get?nocache=1`,
     fetcher
   );
 
@@ -38,16 +38,14 @@ export default function Coins({ debug, view = 'full' }: Props) {
   }
 
   return (
-    <div className="flex flex-col lg:px-2 max-w-[1420px] mx-auto mt-2">
+    <div className="flex flex-col lg:px-2 max-w-[1100px] mx-auto mt-2">
       {view !== 'minimal' && (
-        <div className="grid grid-cols-7 w-full mx-1 mb-6 text-center text-stone-500">
-          <div />
+        <div className="grid grid-cols-5 w-full mx-1 mb-6 text-center text-stone-500">
           <div>M</div>
           <div>W</div>
           <div>D</div>
           <div>4h</div>
           <div>45</div>
-          <div />
         </div>
       )}
       {Object.entries(data).map(([ticker, times]: any) => (

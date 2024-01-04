@@ -1,10 +1,11 @@
-import { Popover, Text, Button } from '@mantine/core';
+import { Popover } from '@mantine/core';
 
 export default function PopInfo({ children, past, last, timestamp }: any) {
+  if (!past) return children;
   return (
     <Popover width={200} position="bottom" withArrow shadow="md">
       <Popover.Target>{children}</Popover.Target>
-      <Popover.Dropdown className="overflow-hidden">
+      <Popover.Dropdown className="overflow-scroll">
         {timestamp}
         <pre>
           <code>
@@ -38,23 +39,25 @@ export default function PopInfo({ children, past, last, timestamp }: any) {
             )}
           </code>
         </pre>
-        <pre>
-          <code>
-            past
-            {JSON.stringify(
-              {
-                score: past.score,
-                avg: past.score - past.delta,
-                delta: past.delta,
-                price: past.price,
-                // days: past.days,
-                // mins: past.mins.toString(),
-              },
-              null,
-              2
-            )}
-          </code>
-        </pre>
+        {!!past?.score && (
+          <pre>
+            <code>
+              past
+              {JSON.stringify(
+                {
+                  score: past.score,
+                  avg: past.score - past.delta,
+                  delta: past.delta,
+                  price: past.price,
+                  // days: past.days,
+                  // mins: past.mins.toString(),
+                },
+                null,
+                2
+              )}
+            </code>
+          </pre>
+        )}
       </Popover.Dropdown>
     </Popover>
   );

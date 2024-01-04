@@ -25,5 +25,8 @@ module.exports = {
     'func-names': 'off',
     'no-else-return': 'off',
     'prefer-destructuring': 'off',
+    'no-restricted-syntax': 'off',
+    'guard-for-in': 'off',
+    'no-continue': 'off',
   },
 };

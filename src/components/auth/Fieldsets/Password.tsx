@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/sharp-solid-svg-icons';
 import styles from './index.module.scss';
 import stytchPasswordAuthenticate from '@/src/app/auth/actions/stytchPasswordAuthenticate';
-import phoneOrEmail from '@/src/functions/phoneOrEmail';
+import phoneOrEmail from '@/src/functions/string/phoneOrEmail';
 import useAuthReaction from '@/src/hooks/useAuthReaction';
 
 export default function SignupPassword({ csrfToken }: any = {}) {

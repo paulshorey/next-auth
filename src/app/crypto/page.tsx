@@ -22,7 +22,7 @@ export default function PageCrypto() {
         }
         subtitle={
           <div className="font-extralight tracking-wide pb-1">
-            rsi sentiment per timeframe
+            rsi momentum per timeframe
             {/* robot financial adviser - no emotions or incentives - just accurate analysis */}
           </div>
         }

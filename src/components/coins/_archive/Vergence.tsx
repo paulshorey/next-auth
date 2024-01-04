@@ -1,12 +1,16 @@
 import { faArrowLeftLong, faLeftLong } from '@fortawesome/pro-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-export default function Vergence({ deltaAvg, deltaRsi }: { deltaAvg: any; deltaRsi: any }) {
+export default function Vergence({
+  deltaAvg,
+  deltaRsi,
+  className,
+}: { deltaAvg: any; deltaRsi: any } & any) {
   const rsiDegree = Math.min(Math.max(deltaRsi, -15), 15) * -6;
   const avgDegree = Math.min(Math.max(deltaAvg, -15), 15) * -6;
 
   return (
-    <span className="">
+    <span className={`${className} pr-1`}>
       {/* {Math.round(deltaRsi)} */}
       <FontAwesomeIcon
         size="xs"
